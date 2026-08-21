@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server'
-import prisma from '../../../../lib/prisma'
 import { ADMIN_COOKIE, createAdminToken } from '../../../../lib/admin-auth'
+import { recordAuthEvent } from '../../../../lib/audit'
 
 export async function POST(request: Request) {
   const input = await request.json().catch(() => ({}))
@@ -11,14 +11,11 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: 'Login yoki parol xato' }, { status: 401 })
   }
 
-  await prisma.authEvent.create({
-    data: {
-      name: username,
-      email: `${username}@admin.local`,
-      event: 'ADMIN_LOGIN',
-      ipAddress: request.headers.get('x-forwarded-for')?.split(',')[0]?.trim() || null,
-      userAgent: request.headers.get('user-agent') || null
-    }
+  await recordAuthEvent({
+    name: username,
+    email: `${username}@admin.local`,
+    event: 'ADMIN_LOGIN',
+    request
   })
 
   const response = NextResponse.json({ ok: true, username })

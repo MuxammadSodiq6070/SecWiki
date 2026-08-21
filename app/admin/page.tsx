@@ -18,9 +18,18 @@ export default function AdminPage() {
 
   useEffect(() => { void loadSession() }, [])
 
+  async function readJson(response: Response) {
+    const text = await response.text()
+    try {
+      return text ? JSON.parse(text) : {}
+    } catch {
+      return {}
+    }
+  }
+
   async function loadSession() {
     const response = await fetch('/api/auth/me', { cache: 'no-store' })
-    const data = await response.json()
+    const data = await readJson(response)
     setIsAdmin(Boolean(data.isAdmin))
     if (data.isAdmin) void loadAudit()
     setLoading(false)
@@ -28,7 +37,7 @@ export default function AdminPage() {
 
   async function loadAudit() {
     const response = await fetch('/api/admin/audit', { cache: 'no-store' })
-    if (response.ok) setAudit(await response.json())
+    if (response.ok) setAudit(await readJson(response))
   }
 
   async function login(event: React.FormEvent) {
@@ -39,7 +48,8 @@ export default function AdminPage() {
       body: JSON.stringify({ username, password })
     })
     if (!response.ok) {
-      setError((await response.json()).error || 'Login amalga oshmadi')
+      const data = await readJson(response)
+      setError(data.error || `Login amalga oshmadi (${response.status})`)
       return
     }
     setPassword('')

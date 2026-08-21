@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server'
-import prisma from '../../../../lib/prisma'
+import { recordAuthEvent } from '../../../../lib/audit'
 
 export async function POST(request: Request) {
   const input = await request.json().catch(() => ({}))
@@ -9,14 +9,11 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: 'Foydalanuvchi maʼlumoti xato' }, { status: 400 })
   }
 
-  await prisma.authEvent.create({
-    data: {
-      name,
-      email,
-      event: 'USER_LOGIN',
-      ipAddress: request.headers.get('x-forwarded-for')?.split(',')[0]?.trim() || null,
-      userAgent: request.headers.get('user-agent') || null
-    }
+  await recordAuthEvent({
+    name,
+    email,
+    event: 'USER_LOGIN',
+    request
   })
   return NextResponse.json({ ok: true })
 }
