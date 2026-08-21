@@ -84,6 +84,11 @@ export default function AuthGate() {
     }
 
     window.localStorage.setItem(AUTH_STORAGE_KEY, JSON.stringify(payload))
+    void fetch('/api/auth/track', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name: payload.name, email: payload.email })
+    }).catch(() => {})
     setOpen(false)
     setError('')
     setForm({ name: '', email: '', password: '' })

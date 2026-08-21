@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server'
 import prisma from '../../../lib/prisma'
 import { serializeCommand } from '../../../lib/command-api'
+import { isAdminRequest } from '../../../lib/admin-auth'
 
 export async function GET(request: Request) {
   try {
@@ -17,6 +18,7 @@ export async function GET(request: Request) {
     const output = commands.map((command) => serializeCommand(command, poweredCommandIds))
 
     if (url.searchParams.has('export')) {
+      if (!isAdminRequest()) return NextResponse.json({ error: 'Admin ruxsati kerak' }, { status: 401 })
       return new NextResponse(JSON.stringify(output, null, 2), {
         status: 200,
         headers: {
@@ -35,8 +37,15 @@ export async function GET(request: Request) {
 
 export async function POST(request: Request) {
   try {
+    if (!isAdminRequest()) return NextResponse.json({ error: 'Faqat admin yangi maʼlumot qoʼsha oladi' }, { status: 401 })
     const body = await request.json()
-    const payload = Array.isArray(body) ? body : body.import && Array.isArray(body.data) ? body.data : null
+    const payload = Array.isArray(body)
+      ? body
+      : Array.isArray(body?.Command)
+        ? body.Command
+        : body?.import && Array.isArray(body.data)
+          ? body.data
+          : null
 
     if (payload) {
       const created = await prisma.command.createMany({
@@ -46,7 +55,9 @@ export async function POST(request: Request) {
           commandText: typeof item.commandText === 'string' ? item.commandText : '',
           shortDesc: typeof item.shortDesc === 'string' ? item.shortDesc : null,
           fullDoc: typeof item.fullDoc === 'string' ? item.fullDoc : null,
-          parameters: JSON.stringify(Array.isArray(item.parameters) ? item.parameters : [])
+          parameters: typeof item.parameters === 'string'
+            ? item.parameters
+            : JSON.stringify(Array.isArray(item.parameters) ? item.parameters : [])
         })),
         skipDuplicates: true
       })

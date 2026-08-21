@@ -24,6 +24,7 @@ export default function TopNavbar() {
         <nav className="flex items-center gap-5 text-sm text-[#ffb3b3]" aria-label="Asosiy navigatsiya">
           <Link href="/" className="rn-topbar-link">Dashboard</Link>
           <Link href="/privacy-policy" className="rn-topbar-link">Maxfiylik</Link>
+          <Link href="/admin" className="rn-topbar-link">Admin</Link>
         </nav>
 
         {user ? (

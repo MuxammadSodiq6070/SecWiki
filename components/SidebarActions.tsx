@@ -1,16 +1,24 @@
 'use client'
 
 import { Download, Upload } from 'lucide-react'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 export default function SidebarActions() {
   const [status, setStatus] = useState('')
+  const [isAdmin, setIsAdmin] = useState(false)
+
+  useEffect(() => {
+    const syncAdmin = () => fetch('/api/auth/me').then((response) => response.json()).then((data) => setIsAdmin(Boolean(data.isAdmin))).catch(() => {})
+    syncAdmin()
+    window.addEventListener('hoogle:admin-changed', syncAdmin)
+    return () => window.removeEventListener('hoogle:admin-changed', syncAdmin)
+  }, [])
 
   async function handleImportFile(file: File) {
     try {
       const text = await file.text()
       const json = JSON.parse(text)
-      const payload = Array.isArray(json) ? json : json.data || []
+      const payload = Array.isArray(json) ? json : Array.isArray(json.Command) ? json.Command : json.data || []
 
       const res = await fetch('/api/commands', {
         method: 'POST',
@@ -48,7 +56,7 @@ export default function SidebarActions() {
     try {
       const text = await navigator.clipboard.readText()
       const json = JSON.parse(text)
-      const payload = Array.isArray(json) ? json : json.data || []
+      const payload = Array.isArray(json) ? json : Array.isArray(json.Command) ? json.Command : json.data || []
 
       const res = await fetch('/api/commands', {
         method: 'POST',
@@ -67,6 +75,7 @@ export default function SidebarActions() {
 
   return (
     <>
+      {!isAdmin ? null : <>
       <div className="flex flex-col gap-2">
         <label className="inline-flex cursor-pointer items-center gap-2 rounded-md border border-[#ff0033] bg-[#110b13] px-2.5 py-1.5 text-left text-[11px] text-[#ffd7d7]">
           <Upload size={13} /> JSON Import
@@ -104,6 +113,7 @@ export default function SidebarActions() {
           {status}
         </div>
       ) : null}
+      </>}
     </>
   )
 }

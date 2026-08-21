@@ -16,10 +16,17 @@ export default function SidebarAddButton() {
   const [shortDesc, setShortDesc] = useState('')
   const [fullDoc, setFullDoc] = useState('')
   const [parametersJson, setParametersJson] = useState('[\n  { "flag": "-sV", "desc": "Service version" }\n]')
+  const [isAdmin, setIsAdmin] = useState(false)
 
   useEffect(() => {
     setMounted(true)
+    const syncAdmin = () => fetch('/api/auth/me').then((response) => response.json()).then((data) => setIsAdmin(Boolean(data.isAdmin))).catch(() => {})
+    syncAdmin()
+    window.addEventListener('hoogle:admin-changed', syncAdmin)
+    return () => window.removeEventListener('hoogle:admin-changed', syncAdmin)
   }, [])
+
+  if (!isAdmin) return null
 
   async function handleCreate() {
     if (!title.trim()) {

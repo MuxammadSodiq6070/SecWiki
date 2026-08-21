@@ -65,6 +65,9 @@ user: postgres
 ```env
 DATABASE_URL="postgresql://postgres:[YOUR-PASSWORD]@db.gayrvnnxvulfbwhjfdum.supabase.co:5432/postgres"
 DIRECT_URL="postgresql://postgres:[YOUR-PASSWORD]@db.gayrvnnxvulfbwhjfdum.supabase.co:5432/postgres"
+ADMIN_USERNAME=admin
+ADMIN_PASSWORD=change-this-strong-password
+ADMIN_SESSION_SECRET=change-this-long-random-secret
 ```
 
 `[YOUR-PASSWORD]` o‘rniga Supabase project parolingizni yozing. Parolda `@`, `#`, `%`, `/` yoki boshqa maxsus belgilar bo‘lsa, ularni percent-encode qiling. Masalan, `@` belgisi `%40` bo‘ladi.
@@ -117,6 +120,34 @@ npm run build
 ```
 
 Deploydan keyin API health endpointini `https://your-domain.vercel.app/api/health` orqali tekshiring. U `{ "ok": true, "service": "hoogle-api" }` qaytaradi.
+
+### Admin panel va JSON import
+
+Vercel environment variables ichida quyidagi uchta qiymatni albatta o‘rnating:
+
+```env
+ADMIN_USERNAME=faqat-admin-login
+ADMIN_PASSWORD=juda-kuchli-parol
+ADMIN_SESSION_SECRET=kamida-32-belgili-random-secret
+```
+
+Admin panel: `https://your-domain.vercel.app/admin`.
+
+Faqat shu env username va password bilan kirgan admin command qo‘sha oladi, JSON import/export qila oladi va audit logni ko‘radi. API ham server-side session cookie tekshiradi, shuning uchun tugmani yashirishning o‘zi bilan cheklanmaydi.
+
+JSON import `database_backup.json` kabi formatlarni qabul qiladi:
+
+```json
+{ "Command": [{ "title": "...", "category": "...", "parameters": "[]" }] }
+```
+
+Yoki oddiy array formatidan foydalanish mumkin:
+
+```json
+[{ "title": "...", "category": "...", "commandText": "...", "parameters": [] }]
+```
+
+`CommandComment` va `CommandPower` ma'lumotlari backup faylida bo‘lsa ham, import qilinadigan asosiy qism `Command` array'idir. Importdan keyin Postgres ID'larini yangi bazaga mos qilib yaratadi.
 
 ### Xavfsizlik eslatmasi
 
