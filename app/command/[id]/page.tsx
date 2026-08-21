@@ -5,7 +5,6 @@ import React, { useEffect, useState } from 'react'
 import { AUTH_STORAGE_KEY, openAuthModal } from '../../../components/AuthGate'
 import { Lock, ShieldAlert } from 'lucide-react'
 import CommandEngagement from '../../../components/CommandEngagement'
-import { apiUrl } from '../../../lib/api'
 
 type Props = { params: { id: string } }
 
@@ -45,7 +44,7 @@ export default function CommandPage({ params }: Props) {
   useEffect(() => {
     async function load() {
       try {
-        const res = await fetch(apiUrl(`/api/commands/${id}`))
+        const res = await fetch(`/api/commands/${id}`)
         if (!res.ok) {
           setCmd(null)
           return

@@ -1,58 +1,35 @@
 # Hoogle
 
-Hoogle ikki alohida servisdan iborat:
+Hoogle bitta Next.js servisidan iborat. Frontend va backend API bir xil Next.js App Router loyihasida ishlaydi:
 
-- Next.js frontend: `npm run dev` / `npm run build` / `npm start`
-- Express + Prisma backend: `npm run dev:api` / `npm run start:api`
+- UI: `app/` va `components/`
+- API Route Handlers: `app/api/**/route.ts`
+- Database: Prisma + Supabase Postgres
 
 ## Local setup
 
 1. `.env.example` faylidan `.env` yarating.
 2. `npm install` ishlating.
 3. `npx prisma generate` va `npx prisma db push` ishlating.
-4. Backendni `npm run dev:api` bilan 4000-portda ishga tushiring.
-5. Frontendni `npm run dev` bilan 3000-portda ishga tushiring.
+4. `npm run dev` bilan Next.js serverini 3000-portda ishga tushiring.
 
-Frontend `NEXT_PUBLIC_API_URL` orqali backend URL'ni oladi. Backend CORS uchun `FRONTEND_URL` qiymatidan foydalanadi.
+Frontend so‘rovlari same-origin nisbiy yo‘llardan foydalanadi: `/api/commands`, `/api/commands/:id/comments` va `/api/commands/:id/power`.
 
 ## Deploy
-
-Backend servisida:
 
 ```bash
 npm install
 npx prisma generate
 npx prisma db push
-npm run start:api
-```
-
-Backend env:
-
-```env
-DATABASE_URL=file:./prisma/dev.db
-PORT=4000
-FRONTEND_URL=https://your-frontend-domain.com
-```
-
-Frontend servisida:
-
-```bash
-npm install
 npm run build
 npm start
 ```
 
-Frontend env:
-
-```env
-NEXT_PUBLIC_API_URL=https://your-backend-domain.com
-```
-
-Production uchun SQLite o‘rniga persistent volume yoki PostgreSQL ishlatish tavsiya qilinadi. `GET /health` endpoint backend holatini tekshirish uchun mavjud.
+Vercel project env'lariga `DATABASE_URL` va `DIRECT_URL` qiymatlarini qo‘ying. `npm start` Vercel’da alohida ishlatilmaydi, Vercel `npm run build` natijasida Next.js API Route Handler’larni serverless function sifatida ishga tushiradi.
 
 ## Supabase bilan ulash
 
-Backend Prisma orqali Supabase Postgres'ga ulanadi. Frontend Supabase Data API'ga to‘g‘ridan-to‘g‘ri ulanmaydi, shuning uchun Supabase `service_role` key yoki secret key'ni frontendga qo‘ymang.
+Next.js API Route Handler’lari Prisma orqali Supabase Postgres'ga ulanadi. Frontend Supabase Data API'ga to‘g‘ridan-to‘g‘ri ulanmaydi, shuning uchun Supabase `service_role` key yoki secret key'ni frontendga qo‘ymang.
 
 ### 1. Supabase project yarating
 
@@ -74,7 +51,25 @@ alter default privileges for role postgres in schema public grant all on routine
 
 ### 2. Connection string'larni oling
 
-Backend serveri uchun **Supavisor Session mode** connection string'ni `DATABASE_URL`ga qo‘ying. Migration uchun porti `5432` bo‘lgan direct yoki session connection string'ni `DIRECT_URL`ga qo‘ying.
+Sizning Supabase project connection ma'lumotlaringiz:
+
+```text
+host: db.gayrvnnxvulfbwhjfdum.supabase.co
+port: 5432
+database: postgres
+user: postgres
+```
+
+`.env` faylida quyidagidan foydalaning:
+
+```env
+DATABASE_URL="postgresql://postgres:[YOUR-PASSWORD]@db.gayrvnnxvulfbwhjfdum.supabase.co:5432/postgres"
+DIRECT_URL="postgresql://postgres:[YOUR-PASSWORD]@db.gayrvnnxvulfbwhjfdum.supabase.co:5432/postgres"
+```
+
+`[YOUR-PASSWORD]` o‘rniga Supabase project parolingizni yozing. Parolda `@`, `#`, `%`, `/` yoki boshqa maxsus belgilar bo‘lsa, ularni percent-encode qiling. Masalan, `@` belgisi `%40` bo‘ladi.
+
+Vercel serverless Route Handler’lari uchun **Supavisor Transaction mode** connection string'ni `DATABASE_URL`ga qo‘ying. Prisma migration uchun porti `5432` bo‘lgan direct yoki session connection string'ni `DIRECT_URL`ga qo‘ying.
 
 ```env
 DATABASE_URL="postgresql://prisma.<PROJECT_REF>:<PASSWORD>@aws-0-<REGION>.pooler.supabase.com:5432/postgres"
@@ -104,42 +99,35 @@ npx prisma db push
 
 Keyingi schema o‘zgarishlari uchun migration yaratib, production’da `npx prisma migrate deploy` ishlatish ma’qul. Birinchi marta mavjud loyiha uchun `db push` ishlatish mumkin.
 
-### 4. Backend deploy env'lari
+### 4. Vercel deploy env'lari
 
-Backend hosting servisida quyidagi env'larni kiriting:
+Vercel project settings'dagi **Environment Variables** bo‘limiga quyidagilarni kiriting:
 
 ```env
-DATABASE_URL=postgresql://...
-DIRECT_URL=postgresql://...
-PORT=4000
-FRONTEND_URL=https://your-frontend-domain.com
+DATABASE_URL=postgresql://...:6543/postgres?pgbouncer=true
+DIRECT_URL=postgresql://...:5432/postgres
 ```
 
-Build/start commandlar:
+Vercel build command:
 
 ```bash
 npx prisma generate
 npx prisma db push
-npm run start:api
-```
-
-Backend deploy bo‘lgach `https://your-backend-domain.com/health` manzilini ochib `{ "ok": true }` javobini tekshiring.
-
-### 5. Frontend env'i
-
-Frontend hosting servisida faqat public backend URL'ni kiriting:
-
-```env
-NEXT_PUBLIC_API_URL=https://your-backend-domain.com
-```
-
-Frontend build/start:
-
-```bash
 npm run build
-npm start
 ```
+
+Deploydan keyin API health endpointini `https://your-domain.vercel.app/api/health` orqali tekshiring. U `{ "ok": true, "service": "hoogle-api" }` qaytaradi.
 
 ### Xavfsizlik eslatmasi
 
-Bu loyiha Supabase Data API emas, alohida Express backend orqali Prisma'dan foydalanadi. Data API ishlatilmasa, Supabase API Settings'da uni o‘chirish mumkin. Agar keyinchalik public schema Data API orqali expose qilinsa, barcha jadvallarda RLS'ni yoqing va aniq policies yozing; `service_role` yoki database parolini browser env'lariga qo‘ymang.
+Bu loyiha Supabase Data API emas, Next.js API Route Handler’lari orqali Prisma'dan foydalanadi. Data API ishlatilmasa, Supabase API Settings'da uni o‘chirish mumkin. Agar keyinchalik public schema Data API orqali expose qilinsa, barcha jadvallarda RLS'ni yoqing va aniq policies yozing; `service_role` yoki database parolini browser env'lariga qo‘ymang.
+
+## Optional Agent Skills
+
+Supabase bilan ishlashda AI coding tool'lar uchun tayyor ko‘rsatmalar va resurslarni o‘rnatish mumkin:
+
+```bash
+npx skills add supabase/agent-skills
+```
+
+Bu qadam majburiy emas. O‘rnatgandan keyin agent konfiguratsiyasini qayta yuklang yoki VS Code'ni restart qiling.

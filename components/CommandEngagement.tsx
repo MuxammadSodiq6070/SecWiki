@@ -3,7 +3,6 @@
 import { MessageSquare, Send, Zap } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import { getAuthUser, openAuthModal, type AuthUser } from './AuthGate'
-import { apiUrl } from '../lib/api'
 
 type Comment = { id: number; authorName: string; body: string; createdAt: string }
 
@@ -26,14 +25,14 @@ export default function CommandEngagement({ commandId, compact = false, initialP
   }, [commandId, compact])
 
   async function loadComments() {
-    const response = await fetch(apiUrl(`/api/commands/${commandId}/comments`))
+    const response = await fetch(`/api/commands/${commandId}/comments`)
     if (response.ok) setComments(await response.json())
   }
 
   async function loadPower() {
     const currentUser = getAuthUser()
     const query = currentUser ? `?userEmail=${encodeURIComponent(currentUser.email)}` : ''
-    const response = await fetch(apiUrl(`/api/commands/${commandId}/power${query}`))
+    const response = await fetch(`/api/commands/${commandId}/power${query}`)
     if (response.ok) {
       const data = await response.json()
       setPowerCount(data.count)
@@ -43,7 +42,7 @@ export default function CommandEngagement({ commandId, compact = false, initialP
 
   async function togglePower() {
     if (!user) return openAuthModal()
-    const response = await fetch(apiUrl(`/api/commands/${commandId}/power`), {
+    const response = await fetch(`/api/commands/${commandId}/power`, {
       method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ userEmail: user.email })
     })
     if (response.ok) {
@@ -58,7 +57,7 @@ export default function CommandEngagement({ commandId, compact = false, initialP
     if (!user) return openAuthModal()
     if (!comment.trim()) return setStatus('Comment yozing')
 
-    const response = await fetch(apiUrl(`/api/commands/${commandId}/comments`), {
+    const response = await fetch(`/api/commands/${commandId}/comments`, {
       method: 'POST', headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ body: comment, authorName: user.name, authorEmail: user.email })
     })

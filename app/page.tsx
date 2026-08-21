@@ -6,7 +6,6 @@ import { useRouter, useSearchParams } from 'next/navigation'
 import { Search, Copy, Check, Lock } from 'lucide-react'
 import { AUTH_STORAGE_KEY, getAuthUser, openAuthModal } from '../components/AuthGate'
 import CommandEngagement from '../components/CommandEngagement'
-import { apiUrl } from '../lib/api'
 
 type Cmd = {
   id: number
@@ -55,7 +54,7 @@ function CategoryPage() {
     try {
       const user = getAuthUser()
       const query = user ? `?userEmail=${encodeURIComponent(user.email)}` : ''
-      const res = await fetch(apiUrl(`/api/commands${query}`))
+      const res = await fetch(`/api/commands${query}`)
       const data = await res.json()
       setEntries(Array.isArray(data) ? data : [])
     } catch (e) {

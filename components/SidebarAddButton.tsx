@@ -3,7 +3,6 @@
 import { Plus, X } from 'lucide-react'
 import { useState, useEffect } from 'react'
 import { createPortal } from 'react-dom'
-import { apiUrl } from '../lib/api'
 
 const CATEGORY_OPTIONS = ['Recon & Scan', 'Exploitation', 'PrivEsc', 'Web Pentest', 'Nazariya (QA)', 'Asboblar (Tools)']
 
@@ -39,7 +38,7 @@ export default function SidebarAddButton() {
         parameters: parsedParams
       }
 
-      const res = await fetch(apiUrl('/api/commands'), {
+      const res = await fetch('/api/commands', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)

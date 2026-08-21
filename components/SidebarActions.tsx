@@ -2,7 +2,6 @@
 
 import { Download, Upload } from 'lucide-react'
 import { useState } from 'react'
-import { apiUrl } from '../lib/api'
 
 export default function SidebarActions() {
   const [status, setStatus] = useState('')
@@ -13,7 +12,7 @@ export default function SidebarActions() {
       const json = JSON.parse(text)
       const payload = Array.isArray(json) ? json : json.data || []
 
-      const res = await fetch(apiUrl('/api/commands'), {
+      const res = await fetch('/api/commands', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(Array.isArray(payload) ? payload : { import: true, data: payload })
@@ -30,7 +29,7 @@ export default function SidebarActions() {
 
   async function handleExport() {
     try {
-      const res = await fetch(apiUrl('/api/commands?export=1'))
+      const res = await fetch('/api/commands?export=1')
       const blob = await res.blob()
       const url = URL.createObjectURL(blob)
       const a = document.createElement('a')
@@ -51,7 +50,7 @@ export default function SidebarActions() {
       const json = JSON.parse(text)
       const payload = Array.isArray(json) ? json : json.data || []
 
-      const res = await fetch(apiUrl('/api/commands'), {
+      const res = await fetch('/api/commands', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(Array.isArray(payload) ? payload : { import: true, data: payload })
