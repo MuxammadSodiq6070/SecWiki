@@ -60,7 +60,7 @@ database: postgres
 user: postgres
 ```
 
-`.env` faylida quyidagidan foydalaning:
+Local yoki migration ulanishi uchun `.env` faylida quyidagidan foydalaning:
 
 ```env
 DATABASE_URL="postgresql://postgres:[YOUR-PASSWORD]@db.gayrvnnxvulfbwhjfdum.supabase.co:5432/postgres"
@@ -75,8 +75,8 @@ ADMIN_SESSION_SECRET=change-this-long-random-secret
 Vercel serverless Route Handler’lari uchun **Supavisor Transaction mode** connection string'ni `DATABASE_URL`ga qo‘ying. Prisma migration uchun porti `5432` bo‘lgan direct yoki session connection string'ni `DIRECT_URL`ga qo‘ying.
 
 ```env
-DATABASE_URL="postgresql://prisma.<PROJECT_REF>:<PASSWORD>@aws-0-<REGION>.pooler.supabase.com:5432/postgres"
-DIRECT_URL="postgresql://prisma.<PROJECT_REF>:<PASSWORD>@aws-0-<REGION>.pooler.supabase.com:5432/postgres"
+DATABASE_URL="postgresql://prisma.<PROJECT_REF>:<PASSWORD>@aws-0-<REGION>.pooler.supabase.com:6543/postgres?pgbouncer=true&connection_limit=1"
+DIRECT_URL="postgresql://postgres:<PASSWORD>@db.<PROJECT_REF>.supabase.co:5432/postgres"
 ```
 
 Serverless yoki ko‘p parallel instance ishlatiladigan deployda `DATABASE_URL` uchun port `6543` transaction-mode pooler ishlating va oxiriga `?pgbouncer=true` qo‘shing. `DIRECT_URL` esa migration uchun port `5432` bo‘lib qoladi:

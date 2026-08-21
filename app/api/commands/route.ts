@@ -81,7 +81,10 @@ export async function POST(request: Request) {
   } catch (error) {
     console.error(error)
     const message = error instanceof Error ? error.message : 'Nomaʼlum xatolik'
-    return NextResponse.json({ error: `Saqlashda xatolik: ${message}` }, { status: 500 })
+    const databaseMessage = message.includes("Can't reach database server")
+      ? "Vercel DATABASE_URL Supabase pooler emas. DATABASE_URL uchun :6543 transaction pooler, DIRECT_URL uchun :5432 ishlating."
+      : message
+    return NextResponse.json({ error: `Saqlashda xatolik: ${databaseMessage}` }, { status: 500 })
   }
 }
 
