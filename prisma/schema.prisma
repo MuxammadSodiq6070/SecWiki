@@ -1,0 +1,44 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model Command {
+  id          Int      @id @default(autoincrement())
+  title       String
+  category    String
+  commandText String
+  shortDesc   String?
+  fullDoc     String?  // full markdown or rich-text
+  parameters  String?  // JSON serialized array: JSON.stringify([{ flag: "-sV", desc: "service version" }])
+  createdAt   DateTime @default(now())
+  comments    CommandComment[]
+  powers      CommandPower[]
+}
+
+model CommandComment {
+  id          Int      @id @default(autoincrement())
+  commandId   Int
+  authorName  String
+  authorEmail String
+  body        String
+  createdAt   DateTime @default(now())
+  command     Command  @relation(fields: [commandId], references: [id], onDelete: Cascade)
+
+  @@index([commandId, createdAt])
+}
+
+model CommandPower {
+  id         Int      @id @default(autoincrement())
+  commandId  Int
+  userEmail  String
+  createdAt  DateTime @default(now())
+  command    Command  @relation(fields: [commandId], references: [id], onDelete: Cascade)
+
+  @@unique([commandId, userEmail])
+}
