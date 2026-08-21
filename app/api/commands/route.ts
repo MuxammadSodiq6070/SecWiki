@@ -55,9 +55,7 @@ export async function POST(request: Request) {
           commandText: typeof item.commandText === 'string' ? item.commandText : '',
           shortDesc: typeof item.shortDesc === 'string' ? item.shortDesc : null,
           fullDoc: typeof item.fullDoc === 'string' ? item.fullDoc : null,
-          parameters: typeof item.parameters === 'string'
-            ? item.parameters
-            : JSON.stringify(Array.isArray(item.parameters) ? item.parameters : [])
+          parameters: normalizeParameters(item.parameters)
         })),
         skipDuplicates: true
       })
@@ -82,6 +80,19 @@ export async function POST(request: Request) {
     return NextResponse.json(serializeCommand(created), { status: 201 })
   } catch (error) {
     console.error(error)
-    return NextResponse.json({ error: 'Saqlashda xatolik' }, { status: 500 })
+    const message = error instanceof Error ? error.message : 'Nomaʼlum xatolik'
+    return NextResponse.json({ error: `Saqlashda xatolik: ${message}` }, { status: 500 })
   }
+}
+
+function normalizeParameters(value: unknown) {
+  if (typeof value === 'string') {
+    try {
+      const parsed = JSON.parse(value)
+      return JSON.stringify(Array.isArray(parsed) ? parsed : [])
+    } catch {
+      return '[]'
+    }
+  }
+  return JSON.stringify(Array.isArray(value) ? value : [])
 }

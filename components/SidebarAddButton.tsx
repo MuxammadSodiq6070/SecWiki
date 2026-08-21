@@ -51,7 +51,17 @@ export default function SidebarAddButton() {
         body: JSON.stringify(payload)
       })
 
-      if (!res.ok) throw new Error('Create failed')
+      if (!res.ok) {
+        const text = await res.text()
+        let message = `Server xatosi (${res.status})`
+        try {
+          const data = text ? JSON.parse(text) : null
+          if (data?.error) message = data.error
+        } catch {
+          if (text) message = `${message}: ${text.slice(0, 120)}`
+        }
+        throw new Error(message)
+      }
 
       setShowModal(false)
       setTitle('')
@@ -63,7 +73,7 @@ export default function SidebarAddButton() {
       window.location.reload()
     } catch (error) {
       console.error(error)
-      setStatus('JSON parametrlari xato yoki server xatosi')
+      setStatus(error instanceof Error ? error.message : 'Command saqlanmadi')
     }
   }
 

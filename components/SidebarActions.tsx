@@ -14,11 +14,32 @@ export default function SidebarActions() {
     return () => window.removeEventListener('hoogle:admin-changed', syncAdmin)
   }, [])
 
+  async function responseError(response: Response, fallback: string) {
+    const text = await response.text()
+    try {
+      const data = text ? JSON.parse(text) : null
+      return data?.error || `${fallback} (${response.status})`
+    } catch {
+      return `${fallback} (${response.status})`
+    }
+  }
+
+  function getCommands(json: unknown) {
+    if (Array.isArray(json)) return json
+    if (json && typeof json === 'object' && Array.isArray((json as { Command?: unknown[] }).Command)) {
+      return (json as { Command: unknown[] }).Command
+    }
+    if (json && typeof json === 'object' && Array.isArray((json as { data?: unknown[] }).data)) {
+      return (json as { data: unknown[] }).data
+    }
+    throw new Error('JSON ichida Command array topilmadi')
+  }
+
   async function handleImportFile(file: File) {
     try {
       const text = await file.text()
       const json = JSON.parse(text)
-      const payload = Array.isArray(json) ? json : Array.isArray(json.Command) ? json.Command : json.data || []
+      const payload = getCommands(json)
 
       const res = await fetch('/api/commands', {
         method: 'POST',
@@ -26,12 +47,12 @@ export default function SidebarActions() {
         body: JSON.stringify(Array.isArray(payload) ? payload : { import: true, data: payload })
       })
 
-      if (!res.ok) throw new Error('Import failed')
+      if (!res.ok) throw new Error(await responseError(res, 'Import amalga oshmadi'))
       setStatus('JSON import bo\'ldi')
       window.location.reload()
     } catch (error) {
       console.error(error)
-      setStatus('Invalid JSON import')
+      setStatus(error instanceof Error ? error.message : 'JSON import xatosi')
     }
   }
 
@@ -56,7 +77,7 @@ export default function SidebarActions() {
     try {
       const text = await navigator.clipboard.readText()
       const json = JSON.parse(text)
-      const payload = Array.isArray(json) ? json : Array.isArray(json.Command) ? json.Command : json.data || []
+      const payload = getCommands(json)
 
       const res = await fetch('/api/commands', {
         method: 'POST',
@@ -64,12 +85,12 @@ export default function SidebarActions() {
         body: JSON.stringify(Array.isArray(payload) ? payload : { import: true, data: payload })
       })
 
-      if (!res.ok) throw new Error('Clipboard import failed')
+      if (!res.ok) throw new Error(await responseError(res, 'Clipboard import amalga oshmadi'))
       setStatus('Clipboard import bo\'ldi')
       window.location.reload()
     } catch (error) {
       console.error(error)
-      setStatus('Clipboard JSON xato')
+      setStatus(error instanceof Error ? error.message : 'Clipboard JSON xato')
     }
   }
 
