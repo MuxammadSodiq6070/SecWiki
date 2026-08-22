@@ -83,6 +83,8 @@ export async function POST(request: Request) {
     const message = error instanceof Error ? error.message : 'Nomaʼlum xatolik'
     const databaseMessage = message.includes("Can't reach database server")
       ? "Vercel DATABASE_URL Supabase pooler emas. DATABASE_URL uchun :6543 transaction pooler, DIRECT_URL uchun :5432 ishlating."
+      : message.includes('user not found in the database')
+        ? "DATABASE_URL ichidagi database user Supabase'da mavjud emas. Pooler uchun postgres.PROJECT_REF userini yoki Supabase'da yaratilgan custom userni ishlating."
       : message
     return NextResponse.json({ error: `Saqlashda xatolik: ${databaseMessage}` }, { status: 500 })
   }
