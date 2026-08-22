@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "skills": {
+    "supabase": {
+      "source": "supabase/agent-skills",
+      "sourceType": "github",
+      "skillPath": "skills/supabase/SKILL.md",
+      "computedHash": "60c38deb985fcaa0a606ffa087ca04e9f4bcfc15844f22fa79d78ea7ea1b33df"
+    },
+    "supabase-postgres-best-practices": {
+      "source": "supabase/agent-skills",
+      "sourceType": "github",
+      "skillPath": "skills/supabase-postgres-best-practices/SKILL.md",
+      "computedHash": "f490a52492e2120aed1d5c0e3988ad542eba14db60939a9464e6e51f0415590d"
+    }
+  }
+}

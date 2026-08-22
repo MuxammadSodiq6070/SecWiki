@@ -1,9 +1,16 @@
 import { createClient } from '@supabase/supabase-js'
 
 function getSupabaseConfig() {
-  const url = process.env.SUPABASE_URL
-  const key = process.env.SUPABASE_SECRET_KEY || process.env.SUPABASE_SERVICE_ROLE_KEY
-  if (!url || !key) throw new Error('SUPABASE_URL va SUPABASE_SECRET_KEY env qiymatlari kerak')
+  const url = process.env.NEXT_PUBLIC_SUPABASE_URL || process.env.SUPABASE_URL
+  const key =
+    process.env.SUPABASE_SERVICE_ROLE_KEY ||
+    process.env.SUPABASE_SECRET_KEY ||
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ||
+    process.env.SUPABASE_ANON_KEY
+
+  if (!url || !key) {
+    throw new Error('SUPABASE_URL (yoki NEXT_PUBLIC_SUPABASE_URL) va Supabase API Key topilmadi.')
+  }
   return { url, key }
 }
 
