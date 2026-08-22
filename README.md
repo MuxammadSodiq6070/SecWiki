@@ -111,6 +111,15 @@ DATABASE_URL=postgresql://...:6543/postgres?pgbouncer=true
 DIRECT_URL=postgresql://...:5432/postgres
 ```
 
+Supabase Auth uchun ham backend env'lariga quyidagilarni qo‘shing:
+
+```env
+SUPABASE_URL=https://gayrvnnxvulfbwhjfdum.supabase.co
+SUPABASE_SECRET_KEY=sb_secret_...
+```
+
+`SUPABASE_SECRET_KEY` faqat server/Vercel Environment Variables ichida turadi. Uni `NEXT_PUBLIC_` nomi bilan bermang va frontend kodiga yozmang. Supabase Dashboard → Authentication → Providers → Email bo‘limida Email provider yoqilganini tekshiring. Email confirmation yoqilgan bo‘lsa, registerdan keyin foydalanuvchi emaildagi tasdiqlash havolasini bosishi kerak.
+
 Vercel build command:
 
 ```bash

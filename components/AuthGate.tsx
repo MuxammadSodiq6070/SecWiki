@@ -8,7 +8,6 @@ export const AUTH_STORAGE_KEY = 'hoogle-auth-user'
 export type AuthUser = {
   name: string
   email: string
-  password?: string
   authAt?: string
 }
 
@@ -25,6 +24,7 @@ export function getAuthUser(): AuthUser | null {
 
 export function logout() {
   if (typeof window === 'undefined') return
+  void fetch('/api/auth/logout', { method: 'POST' }).catch(() => {})
   window.localStorage.removeItem(AUTH_STORAGE_KEY)
   window.dispatchEvent(new CustomEvent('hoogle:auth-changed'))
 }
@@ -50,7 +50,16 @@ export default function AuthGate() {
       if (!isAuthenticated()) setOpen(true)
     }
 
-    sync()
+    fetch('/api/auth/session', { cache: 'no-store' })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.user) {
+          window.localStorage.setItem(AUTH_STORAGE_KEY, JSON.stringify({ ...data.user, authAt: new Date().toISOString() }))
+          setOpen(false)
+          window.dispatchEvent(new CustomEvent('hoogle:auth-changed'))
+        } else sync()
+      })
+      .catch(sync)
     window.addEventListener('hoogle:auth-required', handler)
     window.addEventListener('hoogle:auth-changed', sync)
     return () => {
@@ -59,7 +68,7 @@ export default function AuthGate() {
     }
   }, [])
 
-  function submit(e: React.FormEvent<HTMLFormElement>) {
+  async function submit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
 
     const email = form.email.trim()
@@ -76,19 +85,23 @@ export default function AuthGate() {
       return
     }
 
-    const payload = {
-      name: mode === 'register' ? name : email.split('@')[0] || 'User',
-      email,
-      password,
-      authAt: new Date().toISOString()
-    }
-
-    window.localStorage.setItem(AUTH_STORAGE_KEY, JSON.stringify(payload))
-    void fetch('/api/auth/track', {
+    const response = await fetch(mode === 'login' ? '/api/auth/login' : '/api/auth/register', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ name: payload.name, email: payload.email })
-    }).catch(() => {})
+      body: JSON.stringify({ name, email, password })
+    })
+    const data = await response.json().catch(() => ({}))
+    if (!response.ok) {
+      setError(data.error || `Auth xatosi (${response.status})`)
+      return
+    }
+    if (data.requiresEmailConfirmation) {
+      setError('Email manzilingizni tasdiqlang, keyin login qiling')
+      return
+    }
+
+    const payload = { ...data.user, authAt: new Date().toISOString() }
+    window.localStorage.setItem(AUTH_STORAGE_KEY, JSON.stringify(payload))
     setOpen(false)
     setError('')
     setForm({ name: '', email: '', password: '' })
